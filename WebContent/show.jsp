@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>CS336 Elections</title>
 </head>
 <body>
 	<%
@@ -16,12 +16,12 @@
 		try {
 
 			//Create a connection string
-			String url = "jdbc:mysql://cs336-2.crujdr9emkb3.us-east-1.rds.amazonaws.com:3306/BarBeerDrinkerSample";
+			String url = "jdbc:mysql://cs336.cpdjrnvmh5hy.us-east-1.rds.amazonaws.com:3306/cs336";
 			//Load JDBC driver - the interface standardizing the connection procedure. Look at WEB-INF\lib for a mysql connector jar file, otherwise it fails.
 			Class.forName("com.mysql.jdbc.Driver");
 
 			//Create a connection to your DB
-			Connection con = DriverManager.getConnection(url, "student", "student");
+			Connection con = DriverManager.getConnection(url, "cs336project", "cs336project");
 
 			//Create a SQL statement
 			Statement stmt = con.createStatement();
@@ -29,6 +29,7 @@
 			String entity = request.getParameter("command");
 			//Make a SELECT query from the table specified by the 'command' parameter at the HelloWorld.jsp
 			String str = "SELECT * FROM " + entity;
+			System.out.println(str);
 			//Run the query against the database.
 			ResultSet result = stmt.executeQuery(str);
 
@@ -40,15 +41,20 @@
 			//make a column
 			out.print("<td>");
 			//print out column header
-			out.print("name");
+			out.print("Year");
 			out.print("</td>");
 			//make a column
 			out.print("<td>");
-			//depending on the radio button selection make a column header for Manufacturer if the beers table was selected and Address if the bars table was selected
-			if (entity.equals("beers"))
-				out.print("manf");
-			else
-				out.print("addr");
+			//depending on the radio button selection make a column header depending on selection from HelloWorld.jsp
+			if (entity.equals("Candidate")) {
+				out.print("FirstName");
+				out.print("</td>");
+				out.print("<td>");
+				out.print("LastName");
+			}
+			else if (entity.equals("States")) {
+				out.print("State");
+			}
 			out.print("</td>");
 			out.print("</tr>");
 
@@ -58,15 +64,20 @@
 				out.print("<tr>");
 				//make a column
 				out.print("<td>");
-				//Print out current bar or beer name:
-				out.print(result.getString("name"));
+				//Print out current Candidate or State Year:
+				out.print(result.getString("Year"));
 				out.print("</td>");
 				out.print("<td>");
-				//Print out current bar/beer additional info: Manf or Address
-				if (entity.equals("beers"))
-					out.print(result.getString("manf"));
-				else
-					out.print(result.getString("addr"));
+				//Print out current Candidate/State additional projection: CandidateName or StateName
+				if (entity.equals("Candidate")){
+					out.print(result.getString("FirstName"));
+					out.print("</td>");
+					out.print("<td>");
+					out.print(result.getString("LastName"));
+				}
+				else if (entity.equals("States")) {
+					out.print(result.getString("State"));
+				}
 				out.print("</td>");
 				out.print("</tr>");
 
@@ -77,6 +88,7 @@
 			con.close();
 
 		} catch (Exception e) {
+			
 		}
 	%>
 

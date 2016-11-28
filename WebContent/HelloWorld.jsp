@@ -7,23 +7,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Beer World</title>
+<title>State Voting Trends 1996 - 2012</title>
 </head>
 <body>
-Hello World1 <!-- the usual HTML way -->
-<% out.println("Hello World2"); %> <!-- output the same thing, but using 
+Hello World in html. <!-- the usual HTML way -->
+<% out.println("Hello World in jsp programming."); %> <!-- output the same thing, but using 
                                       jsp programming -->
 
 									  
 <br>
  <!-- Show html form to i) display something, ii) choose an action via a 
   | radio button -->
+ This will perform a SELECT * on Candidate or States
 <form method="get" action="show.jsp" enctype=text/plain>
     <!-- note the show.jsp will be invoked when the choice is made -->
 	<!-- The next lines give HTML for radio buttons being displayed -->
-  <input type="radio" name="command" value="beers"/>Let's have a beer!
+  <input type="radio" name="command" value="Candidate"/>Let's have a Candidate!
   <br>
-  <input type="radio" name="command" value="bars"/>Let's go to a bar!
+  <input type="radio" name="command" value="States"/>Let's go to a State!
     <!-- when the radio for bars is chosen, then 'command' will have value 
      | 'bars', in the show.jsp file, when you access request.parameters -->
   <br>
@@ -31,7 +32,9 @@ Hello World1 <!-- the usual HTML way -->
 </form>
 <br>
 
-Alternatively, lets type in a bar and a beer and  a price limit.
+--------------------------------------------------------------- <br>
+NOTE THIS DOESNT WORK. <br>
+Alternatively, lets type in a bar and a beer and  a price limit. 
 <br>
 	<form method="post" action="newBeer.jsp">
 	<table>
@@ -49,17 +52,40 @@ Alternatively, lets type in a bar and a beer and  a price limit.
 	<input type="submit" value="submit">
 	</form>
 <br>
+--------------------------------------------------------------- <br>
 
-Or we can query the beers with price:
+Or we can query the states for the number of popular votes for a given year or all years:
 <br>
 	<form method="query" action="query.jsp">
-		<select name="price" size=1>
-			<option value="3.0">$3.0 and under</option>
-			<option value="5.0">$5.0 and under</option>
-			<option value="8.0">$8.0 and under</option>
-		</select>&nbsp;<br> <input type="submit" value="submit">
+		Year:
+		<select name="Year" size=1>
+			<option value="2012">2012</option>
+			<option value="2008">2008</option>
+			<option value="2004">2004</option>
+			<option value="2000">2000</option>
+			<option value="1996">1996</option>
+			<option value="-1">All years</option>
+		</select>&nbsp;<br>
+		Popular Votes: 
+		<select name="PopVotes" size=1>
+			<option value="5000000">5,000,000 and over</option>
+			<option value="2000000">2,000,000 and over</option>
+			<option value="1000000">1,000,000 and over</option>
+			<option value="500000">500,000 and over</option>
+			<option value="100000">100,000 and over</option>
+		</select>&nbsp;<br>	
+		Order By: 
+		<select name="OrderBy" size=1>
+			<option value="Year DESC, State ASC">Year and State(in alphabetical order)</option>
+			<option value="PopVotes DESC">Popular Votes</option>
+		</select>&nbsp;<br>	
+		<input type="submit" value="submit">
 	</form>
 <br>
+
+--------------------------------------------------------------- <br>
+
+
 
 </body>
 </html>
