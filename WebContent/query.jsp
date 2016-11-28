@@ -39,7 +39,11 @@
 			System.out.println(str);
 			//Run the query against the database.
 			ResultSet result = stmt.executeQuery(str);
-
+			
+			//Create chart tag
+			out.print("<script type=\"text/javascript\" src=\"jquery-2.1.1.min.js\"></script><script type=\"text/javascript\" src=\"Chart.min.js\"></script>");
+			out.print("<canvas id=\"myChart\" width=\"1920\" height=\"2200\"></canvas>");
+			
 			//Make an HTML table to show the results in:
 			out.print("<table>");
 
@@ -59,33 +63,79 @@
 			out.print("Popular Votes");
 			out.print("</td>");
 			out.print("</tr>");
-
+			
+			String year;
+			String state;
+			String popvotes;
+			//Use the these variables to accumulate the chart data
+			String labels = "[";
+			String data = "[";
+			String backgroundColor = "[";
+			String borderColor = "[";
+			
 			//parse out the results
 			while (result.next()) {
+				year = result.getString("Year");
+				popvotes = result.getString("PopVotes");
+				state = result.getString("State");
+				
 				//make a row
 				out.print("<tr>");
 				//make a column
 				out.print("<td>");
 				//Print out current votes year:
-				out.print(result.getString("Year"));
+				out.print(year);
 				out.print("</td>");
 				out.print("<td>");
 				//Print out current state voting:
-				out.print(result.getString("State"));
+				out.print(state);
 				out.print("</td>");
 				out.print("<td>");
 				//Print out the number of popular votes
-				out.print(result.getString("PopVotes"));
+				out.print(popvotes);
 				out.print("</td>");
 				out.print("</tr>");
-
+				
+				labels += "\"" + year;
+				labels += state + "\", ";
+				data += popvotes + ", ";
+				
+				backgroundColor += "\"rgba(54, 162, 235, 0.2)\", "; //Blue
+				borderColor += "\"rgba(54, 162, 235, 1)\", ";
 			}
+			
 			out.print("</table>");
+			
+			labels = labels.substring(0, labels.length() - 2);
+			data = data.substring(0, data.length() - 2);
+			backgroundColor = backgroundColor.substring(0, backgroundColor.length() - 2);
+			borderColor = borderColor.substring(0, borderColor.length() - 2);
+			labels += "]";
+			data += "]";
+			backgroundColor += "]";
+			borderColor += "]";
+			
+			//System.out.println(labels);
+			//System.out.println(data);
+			//System.out.println(backgroundc);
+			//System.out.println(borderc);
+			
+			out.print("<script> var ctx = document.getElementById(\"myChart\");");
+			out.print("var myChart = new Chart(ctx, { type: 'bar', data: ");
+			out.print("{labels: " + labels + ", "); //State and Year
+			out.print("datasets: [{label: '# of PopVotes', ");
+			out.print("data: "+ data +", "); //PopVotes
+			//out.print("backgroundColor: ['rgba(54, 162, 235, 0.2)'], borderColor:['rgba(54, 162, 235, 1)'], borderWidth: 1}]}");
+			out.print("backgroundColor: " + backgroundColor + ", ");
+			out.print("borderColor: " + borderColor + ", ");
+			out.print("borderWidth: 1}]}");
+			out.print(", options: { responsive: false, scales: { yAxes: [{ ticks: { beginAtZero:true}}] }}});</script>");
 
 			//close the connection.
 			con.close();
 
 		} catch (Exception e) {
+		
 		}
 	%>
 

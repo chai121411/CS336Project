@@ -6,13 +6,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>State Voting Trends 1996 - 2012</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>State Voting Trends 1996 - 2012</title>
+	<script type="text/javascript" src="jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="Chart.min.js"></script>
 </head>
 <body>
-Hello World in html. <!-- the usual HTML way -->
-<% out.println("Hello World in jsp programming."); %> <!-- output the same thing, but using 
-                                      jsp programming -->
+	
+</script>
+	
+	Hello World in html. <!-- the usual HTML way -->
+	<% out.println("Hello World in jsp programming."); %> <!-- output the same thing, but using jsp programming -->
 
 									  
 <br>
