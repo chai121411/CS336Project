@@ -106,6 +106,7 @@
 				labels += state + "\", ";
 				data += popvotes + ", ";
 				
+				
 				backgroundColor += "\"rgba(54, 162, 235, 0.2)\", "; //Blue
 				borderColor += "\"rgba(54, 162, 235, 1)\", ";
 			}
@@ -123,8 +124,8 @@
 			
 			//System.out.println(labels);
 			//System.out.println(data);
-			//System.out.println(backgroundc);
-			//System.out.println(borderc);
+			//System.out.println(backgroundColor);
+			//System.out.println(borderColor);
 			
 			out.print("<script> var ctx = document.getElementById(\"myChart\");");
 			out.print("var myChart = new Chart(ctx, { type: 'bar', data: ");
