@@ -29,12 +29,16 @@
 			String year_entity = request.getParameter("Year");
 			String popvotes_entity = request.getParameter("PopVotes");
 			String orderby_entity = request.getParameter("OrderBy");
+			String str;
 			
 			//Make a SELECT query from the Votes table with the range specified by the 'PopVotes' parameter at the HelloWorld.jsp
-			String str = "SELECT * FROM Votes WHERE PopVotes >= " + popvotes_entity;
+			
+			str = "SELECT * FROM Votes WHERE PopVotes >= " + popvotes_entity;	
+			
 			if (!year_entity.equals("-1")) {
 				str += " AND Year = " + year_entity;
 			}
+			
 			str += " ORDER BY " + orderby_entity;
 			System.out.println(str);
 			//Run the query against the database.
@@ -46,7 +50,8 @@
 			
 			//Make an HTML table to show the results in:
 			out.print("<table>");
-
+			
+			
 			//make a row
 			out.print("<tr>");
 			//make a column
@@ -63,6 +68,7 @@
 			out.print("Popular Votes");
 			out.print("</td>");
 			out.print("</tr>");
+			
 			
 			String year;
 			String state;
@@ -125,12 +131,10 @@
 			out.print("{labels: " + labels + ", "); //State and Year
 			out.print("datasets: [{label: '# of PopVotes', ");
 			out.print("data: "+ data +", "); //PopVotes
-			//out.print("backgroundColor: ['rgba(54, 162, 235, 0.2)'], borderColor:['rgba(54, 162, 235, 1)'], borderWidth: 1}]}");
 			out.print("backgroundColor: " + backgroundColor + ", ");
 			out.print("borderColor: " + borderColor + ", ");
 			out.print("borderWidth: 1}]}");
 			out.print(", options: { responsive: false, scales: { yAxes: [{ ticks: { beginAtZero:true}}] }}});</script>");
-
 			//close the connection.
 			con.close();
 

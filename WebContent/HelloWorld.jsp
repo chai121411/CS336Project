@@ -36,6 +36,7 @@
 </form>
 <br>
 
+<!-- 
 --------------------------------------------------------------- <br>
 NOTE THIS DOESNT WORK. <br>
 Alternatively, lets type in a bar and a beer and  a price limit. 
@@ -56,29 +57,45 @@ Alternatively, lets type in a bar and a beer and  a price limit.
 	<input type="submit" value="submit">
 	</form>
 <br>
+-->
+
 --------------------------------------------------------------- <br>
 
-Or we can query the states for the number of popular votes for a given year or all years:
+
+Popular Votes By State And Year
+<br>
+Add Filters to the results!
 <br>
 	<form method="query" action="query.jsp">
 		Year:
 		<select name="Year" size=1>
-			<option value="2012">2012</option>
-			<option value="2008">2008</option>
-			<option value="2004">2004</option>
-			<option value="2000">2000</option>
-			<option value="1996">1996</option>
 			<option value="-1">All years</option>
+			<option value="1996">1996</option>
+			<option value="2000">2000</option>
+			<option value="2004">2004</option>
+			<option value="2008">2008</option>
+			<option value="2012">2012</option>
 		</select>&nbsp;<br>
 		Popular Votes: 
 		<select name="PopVotes" size=1>
-			<option value="5000000">5,000,000 and over</option>
-			<option value="2000000">2,000,000 and over</option>
-			<option value="1000000">1,000,000 and over</option>
-			<option value="500000">500,000 and over</option>
+			<option value="0">0 and over</option>
 			<option value="100000">100,000 and over</option>
+			<option value="250000">250,000 and over</option>
+			<option value="500000">500,000 and over</option>
+			<option value="600000">600,000 and over</option>
+			<option value="700000">700,000 and over</option>
+			<option value="800000">800,000 and over</option>
+			<option value="900000">900,000 and over</option>
+			<option value="1000000">1,000,000 and over</option>
+			<option value="1100000">1,100,000 and over</option>
+			<option value="1200000">1,200,000 and over</option>
+			<option value="1300000">1,300,000 and over</option>
+			<option value="1400000">1,400,000 and over</option>
+			<option value="1500000">1,500,000 and over</option>
+			<option value="2000000">2,000,000 and over</option>
+			<option value="5000000">5,000,000 and over</option>
 		</select>&nbsp;<br>	
-		Order By: 
+		Order Results By: 
 		<select name="OrderBy" size=1>
 			<option value="Year DESC, State ASC">Year and State(in alphabetical order)</option>
 			<option value="PopVotes DESC">Popular Votes</option>
@@ -88,8 +105,16 @@ Or we can query the states for the number of popular votes for a given year or a
 <br>
 
 --------------------------------------------------------------- <br>
-
-
+<!--
+Aggregate the Result?: 
+		<select name="Aggregate" size=1>
+			<option value="NO">None</option>
+			<option value="AVERAGE">Average</option>
+			<option value="SUM">Sum</option>
+			<option value="MAX">Max</option>
+			<option value="MIN">Min</option>
+		</select>&nbsp;<br>
+-->
 
 </body>
 </html>
