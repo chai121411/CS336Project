@@ -29,7 +29,7 @@
 			String year_entity = request.getParameter("Year");
 			String popvotes_entity = request.getParameter("PopVotes");
 			String orderby_entity = request.getParameter("OrderBy");
-			String str;
+			String str; //the query string
 			
 			//Make a SELECT query from the Votes table with the range specified by the 'PopVotes' parameter at the HelloWorld.jsp
 			

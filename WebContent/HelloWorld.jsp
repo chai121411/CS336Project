@@ -62,19 +62,19 @@ Alternatively, lets type in a bar and a beer and  a price limit.
 --------------------------------------------------------------- <br>
 
 
-Popular Votes By State And Year
+Adhoc Query on Popular Votes
 <br>
-Add Filters to the results!
+Please add filters to the query!
 <br>
 	<form method="query" action="query.jsp">
 		Year:
 		<select name="Year" size=1>
 			<option value="-1">All years</option>
-			<option value="1996">1996</option>
-			<option value="2000">2000</option>
-			<option value="2004">2004</option>
-			<option value="2008">2008</option>
-			<option value="2012">2012</option>
+			<option value="1996">Only 1996</option>
+			<option value="2000">Only 2000</option>
+			<option value="2004">Only 2004</option>
+			<option value="2008">Only 2008</option>
+			<option value="2012">Only 2012</option>
 		</select>&nbsp;<br>
 		Popular Votes: 
 		<select name="PopVotes" size=1>
@@ -97,7 +97,8 @@ Add Filters to the results!
 		</select>&nbsp;<br>	
 		Order Results By: 
 		<select name="OrderBy" size=1>
-			<option value="Year DESC, State ASC">Year and State(in alphabetical order)</option>
+			<option value="Year DESC, State ASC">Year and State</option>
+			<option value="State ASC">State</option>
 			<option value="PopVotes DESC">Popular Votes</option>
 		</select>&nbsp;<br>	
 		<input type="submit" value="submit">
