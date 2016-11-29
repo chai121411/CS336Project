@@ -10,62 +10,28 @@
 	<title>State Voting Trends 1996 - 2012</title>
 	<script type="text/javascript" src="jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="Chart.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="cs336.css">
 </head>
 <body>
 	
-</script>
-	
-	Hello World in html. <!-- the usual HTML way -->
+	<h2>Analyze past election trends about states from 1996 - 2012!</h2> <!-- the usual HTML way -->
 	<% out.println("Hello World in jsp programming."); %> <!-- output the same thing, but using jsp programming -->
 
-									  
-<br>
- <!-- Show html form to i) display something, ii) choose an action via a 
-  | radio button -->
- This will perform a SELECT * on Candidate or States
-<form method="get" action="show.jsp" enctype=text/plain>
-    <!-- note the show.jsp will be invoked when the choice is made -->
-	<!-- The next lines give HTML for radio buttons being displayed -->
-  <input type="radio" name="command" value="Candidate"/>Let's have a Candidate!
-  <br>
-  <input type="radio" name="command" value="States"/>Let's go to a State!
-    <!-- when the radio for bars is chosen, then 'command' will have value 
-     | 'bars', in the show.jsp file, when you access request.parameters -->
-  <br>
-  <input type="submit" value="submit" />
-</form>
-<br>
-
-<!-- 
---------------------------------------------------------------- <br>
-NOTE THIS DOESNT WORK. <br>
-Alternatively, lets type in a bar and a beer and  a price limit. 
-<br>
-	<form method="post" action="newBeer.jsp">
-	<table>
-	<tr>    
-	<td>Bar</td><td><input type="text" name="bar"></td>
-	</tr>
-	<tr>
-	<td>Beer</td><td><input type="text" name="beer"></td>
-	</tr>
-	<tr>
-	<td>Price</td><td><input type="text" name="price"></td>
-	</tr>
-	</table>
-	<br>
-	<input type="submit" value="submit">
+	<h4>SELECT * show.jsp</h4>
+	<p>This will perform a SELECT * on Candidate or States</p>
+	<form method="get" action="show.jsp" id="selectallform" enctype=text/plain>
+		<input type="radio" name="command" value="Candidate"/>Let's have a Candidate!
+		<br>
+		<input type="radio" name="command" value="States"/>Let's go to a State!
+		<br>
+		<input type="submit" value="submit" />
 	</form>
-<br>
--->
 
 --------------------------------------------------------------- <br>
 
-
-Adhoc Query on Popular Votes
-<br>
-Please add filters to the query!
-<br>
+<h4>Adhoc Query on Popular Votes</h4>
+<p>Please add filters to the query!</p>
 	<form method="query" action="query.jsp">
 		Year:
 		<select name="Year" size=1>
@@ -103,7 +69,19 @@ Please add filters to the query!
 		</select>&nbsp;<br>	
 		<input type="submit" value="submit">
 	</form>
-<br>
+
+<script>
+$(document).ready(function() {
+
+	$("#selectallform").submit(function() {
+		if (!$("input[name=command]:checked").val()) {
+		  alert('Nothing is checked in Select * Form!');
+		  return false;
+		}
+	});
+
+});
+</script>
 
 --------------------------------------------------------------- <br>
 <!--
@@ -115,6 +93,29 @@ Aggregate the Result?:
 			<option value="MAX">Max</option>
 			<option value="MIN">Min</option>
 		</select>&nbsp;<br>
+-->
+
+<!-- 
+--------------------------------------------------------------- <br>
+NOTE THIS DOESNT WORK. <br>
+Alternatively, lets type in a bar and a beer and  a price limit. 
+<br>
+	<form method="post" action="newBeer.jsp">
+	<table>
+	<tr>    
+	<td>Bar</td><td><input type="text" name="bar"></td>
+	</tr>
+	<tr>
+	<td>Beer</td><td><input type="text" name="beer"></td>
+	</tr>
+	<tr>
+	<td>Price</td><td><input type="text" name="price"></td>
+	</tr>
+	</table>
+	<br>
+	<input type="submit" value="submit">
+	</form>
+<br>
 -->
 
 </body>
