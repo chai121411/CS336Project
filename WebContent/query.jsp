@@ -6,8 +6,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Query Results</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>Query Results</title>
+
+	<link rel="stylesheet" type="text/css" href="table.css">
+	<script type="text/javascript" src="jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="Chart.min.js"></script>
+	
 </head>
 <body>
 	<%
@@ -45,7 +50,7 @@
 			ResultSet result = stmt.executeQuery(str);
 			
 			//Create chart tag
-			out.print("<script type=\"text/javascript\" src=\"jquery-2.1.1.min.js\"></script><script type=\"text/javascript\" src=\"Chart.min.js\"></script>");
+			//out.print("<script type=\"text/javascript\" src=\"jquery-2.1.1.min.js\"></script><script type=\"text/javascript\" src=\"Chart.min.js\"></script>");
 			out.print("<canvas id=\"myChart\" width=\"1920\" height=\"2200\"></canvas>");
 			
 			//Make an HTML table to show the results in:
@@ -68,7 +73,6 @@
 			out.print("Popular Votes");
 			out.print("</td>");
 			out.print("</tr>");
-			
 			
 			String year;
 			String state;
@@ -105,7 +109,6 @@
 				labels += "\"" + year;
 				labels += state + "\", ";
 				data += popvotes + ", ";
-				
 				
 				backgroundColor += "\"rgba(54, 162, 235, 0.2)\", "; //Blue
 				borderColor += "\"rgba(54, 162, 235, 1)\", ";

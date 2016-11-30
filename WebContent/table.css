@@ -1,0 +1,16 @@
+/*First Row*/
+tr:first-child td {
+    background-color: #ffd27f;/*#9BBBED;*/
+    font-weight: bold;
+}
+
+/*All cells*/
+tr td {
+    border: 1px solid #ccc;
+    padding: 8px;
+}
+
+/*Every other row*/
+tr:nth-child(odd)  {
+	background-color: #F7F7F7;
+}
