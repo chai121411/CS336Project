@@ -15,6 +15,13 @@
 </head>
 <body>
 	
+	<nav>
+	<ul class="topnav" id="myTopnav">
+	  <li><a href="#candidates">Candidate: this one doesnt work</a></li>
+	  <li><a href="#popularvotes">Popular Votes Query</a></li>
+	</ul>
+    </nav>
+	
 	<h2>Analyze past election trends about states from 1996 - 2012!</h2> <!-- the usual HTML way -->
 	<% out.println("Hello World in jsp programming."); %> <!-- output the same thing, but using jsp programming -->
 
@@ -30,7 +37,7 @@
 
 --------------------------------------------------------------- <br>
 
-<h4>Adhoc Query on Popular Votes</h4>
+<h4 id=popularvotes>Adhoc Query on Popular Votes</h4>
 <p>Please add filters to the query!</p>
 	<form method="query" action="query.jsp">
 		Year:
@@ -69,6 +76,59 @@
 		</select>&nbsp;<br>	
 		<input type="submit" value="submit">
 	</form>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+v
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+<p>hi</p>
+
 
 <script>
 $(document).ready(function() {
