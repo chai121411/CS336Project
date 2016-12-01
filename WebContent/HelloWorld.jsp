@@ -12,20 +12,23 @@
 	<script type="text/javascript" src="Chart.min.js"></script>
 	
 	<link rel="stylesheet" type="text/css" href="cs336.css">
-</head>
-<body>
 	
 	<nav>
 	<ul class="topnav" id="myTopnav">
-	  <li><a href="#candidates">Candidate: this one doesnt work</a></li>
-	  <li><a href="#popularvotes">Popular Votes Query</a></li>
+		<li id="navbartitle">Voting Trends 1996 - 2012</li>
+		<li><a href="#selectall">select all</a></li>
+		<li><a href="#popularvotes">Popular Votes Query</a></li>
 	</ul>
     </nav>
+</head>
+<body>
 	
+	<p> </p>
 	<h2>Analyze past election trends about states from 1996 - 2012!</h2> <!-- the usual HTML way -->
-	<% out.println("Hello World in jsp programming."); %> <!-- output the same thing, but using jsp programming -->
+	Ever wanted to perform adhoc queries and have the results shown in a chart? Here you go!
 
-	<h4>SELECT * show.jsp</h4>
+	<hr id=selectall>
+	<h3>SELECT * show.jsp</h4>
 	<p>This will perform a SELECT * on Candidate or States</p>
 	<form method="get" action="show.jsp" id="selectallform" enctype=text/plain>
 		<input type="radio" name="command" value="Candidate"/>Let's have a Candidate!
@@ -35,115 +38,82 @@
 		<input type="submit" value="submit" />
 	</form>
 
---------------------------------------------------------------- <br>
-
-<h4 id=popularvotes>Adhoc Query on Popular Votes</h4>
-<p>Please add filters to the query!</p>
+	<hr id=popularvotes>
+	<h3>Adhoc Query on Popular Votes</h4>
+	<p>Please add filters to the query!</p>
+		<form method="query" action="query.jsp">
+			Year:
+			<select name="Year" size=1>
+				<option value="-1">All years</option>
+				<option value="1996">Only 1996</option>
+				<option value="2000">Only 2000</option>
+				<option value="2004">Only 2004</option>
+				<option value="2008">Only 2008</option>
+				<option value="2012">Only 2012</option>
+			</select>&nbsp;<br>
+			Popular Votes: 
+			<select name="PopVotes" size=1>
+				<option value="0">0 and over</option>
+				<option value="100000">100,000 and over</option>
+				<option value="250000">250,000 and over</option>
+				<option value="500000">500,000 and over</option>
+				<option value="600000">600,000 and over</option>
+				<option value="700000">700,000 and over</option>
+				<option value="800000">800,000 and over</option>
+				<option value="900000">900,000 and over</option>
+				<option value="1000000">1,000,000 and over</option>
+				<option value="1100000">1,100,000 and over</option>
+				<option value="1200000">1,200,000 and over</option>
+				<option value="1300000">1,300,000 and over</option>
+				<option value="1400000">1,400,000 and over</option>
+				<option value="1500000">1,500,000 and over</option>
+				<option value="2000000">2,000,000 and over</option>
+				<option value="5000000">5,000,000 and over</option>
+			</select>&nbsp;<br>	
+			Order Results By: 
+			<select name="OrderBy" size=1>
+				<option value="Year DESC, State ASC">Year and State</option>
+				<option value="State ASC">State</option>
+				<option value="PopVotes DESC">Popular Votes</option>
+			</select>&nbsp;<br>	
+			<input type="submit" value="submit">
+		</form>
+	
+	<hr>
+	<h3>Aggregate</h4>
+	<p>Percentage...</p>
 	<form method="query" action="query.jsp">
-		Year:
-		<select name="Year" size=1>
-			<option value="-1">All years</option>
-			<option value="1996">Only 1996</option>
-			<option value="2000">Only 2000</option>
-			<option value="2004">Only 2004</option>
-			<option value="2008">Only 2008</option>
-			<option value="2012">Only 2012</option>
-		</select>&nbsp;<br>
-		Popular Votes: 
-		<select name="PopVotes" size=1>
-			<option value="0">0 and over</option>
-			<option value="100000">100,000 and over</option>
-			<option value="250000">250,000 and over</option>
-			<option value="500000">500,000 and over</option>
-			<option value="600000">600,000 and over</option>
-			<option value="700000">700,000 and over</option>
-			<option value="800000">800,000 and over</option>
-			<option value="900000">900,000 and over</option>
-			<option value="1000000">1,000,000 and over</option>
-			<option value="1100000">1,100,000 and over</option>
-			<option value="1200000">1,200,000 and over</option>
-			<option value="1300000">1,300,000 and over</option>
-			<option value="1400000">1,400,000 and over</option>
-			<option value="1500000">1,500,000 and over</option>
-			<option value="2000000">2,000,000 and over</option>
-			<option value="5000000">5,000,000 and over</option>
-		</select>&nbsp;<br>	
-		Order Results By: 
-		<select name="OrderBy" size=1>
-			<option value="Year DESC, State ASC">Year and State</option>
-			<option value="State ASC">State</option>
-			<option value="PopVotes DESC">Popular Votes</option>
-		</select>&nbsp;<br>	
-		<input type="submit" value="submit">
+		
 	</form>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-v
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
-<p>hi</p>
+	
+	<hr>
+	
+	<p>hi</p>
+	<p>hi</p>
+	<p>hi</p>
+	<p>hi</p>
+	<p>hi</p>
+	<p>hi</p>
+	<p>hi</p>
+	<p>hi</p>
+	<p>hi</p>
+	<p>hi</p>
+	<p>hi</p>
+	<p>hi</p>
+	<p>hi</p>
 
 
-<script>
-$(document).ready(function() {
+	<script>
+		$(document).ready(function() {
+			$("#selectallform").submit(function() {
+				if (!$("input[name=command]:checked").val()) {
+				  alert('Nothing is checked in Select * Form!');
+				  return false;
+				}
+			});
+		});
+	</script>
 
-	$("#selectallform").submit(function() {
-		if (!$("input[name=command]:checked").val()) {
-		  alert('Nothing is checked in Select * Form!');
-		  return false;
-		}
-	});
-
-});
-</script>
-
---------------------------------------------------------------- <br>
 <!--
 Aggregate the Result?: 
 		<select name="Aggregate" size=1>
@@ -155,28 +125,6 @@ Aggregate the Result?:
 		</select>&nbsp;<br>
 -->
 
-<!-- 
---------------------------------------------------------------- <br>
-NOTE THIS DOESNT WORK. <br>
-Alternatively, lets type in a bar and a beer and  a price limit. 
-<br>
-	<form method="post" action="newBeer.jsp">
-	<table>
-	<tr>    
-	<td>Bar</td><td><input type="text" name="bar"></td>
-	</tr>
-	<tr>
-	<td>Beer</td><td><input type="text" name="beer"></td>
-	</tr>
-	<tr>
-	<td>Price</td><td><input type="text" name="price"></td>
-	</tr>
-	</table>
-	<br>
-	<input type="submit" value="submit">
-	</form>
-<br>
--->
 
 </body>
 </html>
