@@ -31,10 +31,12 @@
 	<h3>SELECT * show.jsp</h4>
 	<p>This will perform a SELECT * on Candidate or States</p>
 	<form method="get" action="show.jsp" id="selectallform" enctype=text/plain>
+		<div class="indent">
 		<input type="radio" name="command" value="Candidate"/>Let's have a Candidate!
-		<br>
+		</div>
+		<div class="indent">
 		<input type="radio" name="command" value="States"/>Let's go to a State!
-		<br>
+		</div>
 		<input type="submit" value="submit" />
 	</form>
 
@@ -42,40 +44,43 @@
 	<h3>Adhoc Query on Popular Votes</h4>
 	<p>Please add filters to the query!</p>
 		<form method="query" action="query.jsp">
-			Year:
-			<select name="Year" size=1>
-				<option value="-1">All years</option>
-				<option value="1996">Only 1996</option>
-				<option value="2000">Only 2000</option>
-				<option value="2004">Only 2004</option>
-				<option value="2008">Only 2008</option>
-				<option value="2012">Only 2012</option>
-			</select>&nbsp;<br>
-			Popular Votes: 
-			<select name="PopVotes" size=1>
-				<option value="0">0 and over</option>
-				<option value="100000">100,000 and over</option>
-				<option value="250000">250,000 and over</option>
-				<option value="500000">500,000 and over</option>
-				<option value="600000">600,000 and over</option>
-				<option value="700000">700,000 and over</option>
-				<option value="800000">800,000 and over</option>
-				<option value="900000">900,000 and over</option>
-				<option value="1000000">1,000,000 and over</option>
-				<option value="1100000">1,100,000 and over</option>
-				<option value="1200000">1,200,000 and over</option>
-				<option value="1300000">1,300,000 and over</option>
-				<option value="1400000">1,400,000 and over</option>
-				<option value="1500000">1,500,000 and over</option>
-				<option value="2000000">2,000,000 and over</option>
-				<option value="5000000">5,000,000 and over</option>
-			</select>&nbsp;<br>	
-			Order Results By: 
-			<select name="OrderBy" size=1>
-				<option value="Year DESC, State ASC">Year and State</option>
-				<option value="State ASC">State</option>
-				<option value="PopVotes DESC">Popular Votes</option>
-			</select>&nbsp;<br>	
+			<div class="indent">Year: 
+				<select name="Year" size=1>
+					<option value="-1">All years</option>
+					<option value="1996">Only 1996</option>
+					<option value="2000">Only 2000</option>
+					<option value="2004">Only 2004</option>
+					<option value="2008">Only 2008</option>
+					<option value="2012">Only 2012</option>
+				</select>&nbsp;<br>
+			</div>
+			<div class="indent"> Popular Votes: 
+				<select name="PopVotes" size=1>
+					<option value="0">0 and over</option>
+					<option value="100000">100,000 and over</option>
+					<option value="250000">250,000 and over</option>
+					<option value="500000">500,000 and over</option>
+					<option value="600000">600,000 and over</option>
+					<option value="700000">700,000 and over</option>
+					<option value="800000">800,000 and over</option>
+					<option value="900000">900,000 and over</option>
+					<option value="1000000">1,000,000 and over</option>
+					<option value="1100000">1,100,000 and over</option>
+					<option value="1200000">1,200,000 and over</option>
+					<option value="1300000">1,300,000 and over</option>
+					<option value="1400000">1,400,000 and over</option>
+					<option value="1500000">1,500,000 and over</option>
+					<option value="2000000">2,000,000 and over</option>
+					<option value="5000000">5,000,000 and over</option>
+				</select>&nbsp;<br>
+			</div>	
+			<div class="indent"> Order Results By: 
+				<select name="OrderBy" size=1>
+					<option value="Year DESC, State ASC">Year and State</option>
+					<option value="State ASC">State</option>
+					<option value="PopVotes DESC">Popular Votes</option>
+				</select>&nbsp;<br>
+			</div>	
 			<input type="submit" value="submit">
 		</form>
 	
