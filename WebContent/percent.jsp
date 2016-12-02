@@ -111,6 +111,9 @@
 			String backgroundColor2 = "[";
 			String borderColor2 = "[";
 			
+			String dataPoints1 = "[{ x: ";
+			String dataPoints2 = "[{ x: ";
+			
 			
 			//parse out the results
 			while (result.next()) {
@@ -151,17 +154,17 @@
 				out.print("</tr>");
 				
 				if (year.equals(year1) && lastname.equals(lastname1)) {
-					labels1 += "\"" + year;
-					labels1 += state + "\", ";
+					labels1 += "\"" + state + "\", ";
 					data1 += percent + ", ";
 					backgroundColor1 += "\"rgba(54, 162, 235, 0.2)\", "; //Blue
 					borderColor1 += "\"rgba(54, 162, 235, 1)\", ";
+					dataPoints1 += "\"" + state+ "\"" + ", y: " + percent + " }, { x: ";
 				} else {
-					labels2 += "\"" + year;
-					labels2 += state + "\", ";
+					labels2 += "\"" + state + "\", ";
 					data2 += percent + ", ";
 					backgroundColor2 += "\"rgba(255, 206, 86, 0.2)\", ";
 					borderColor2 += "\"rgba(255, 206, 86, 1)\", ";
+					dataPoints2 += "\"" + state+ "\"" + ", y: " + percent + " }, { x: ";
 				}	
 			}
 			
@@ -171,29 +174,53 @@
 			data1 = data1.substring(0, data1.length() - 2);
 			backgroundColor1 = backgroundColor1.substring(0, backgroundColor1.length() - 2);
 			borderColor1 = borderColor1.substring(0, borderColor1.length() - 2);
+			dataPoints1 = dataPoints1.substring(0, dataPoints1.length() - 7);
 			labels1 += "]";
 			data1 += "]";
 			backgroundColor1 += "]";
 			borderColor1 += "]";
+			dataPoints1 += "]";
 			
 			labels2 = labels2.substring(0, labels2.length() - 2);
 			data2 = data2.substring(0, data2.length() - 2);
 			backgroundColor2 = backgroundColor2.substring(0, backgroundColor2.length() - 2);
 			borderColor2 = borderColor2.substring(0, borderColor2.length() - 2);
+			dataPoints2 = dataPoints2.substring(0, dataPoints2.length() - 7);
 			labels2 += "]";
 			data2 += "]";
 			backgroundColor2 += "]";
 			borderColor2 += "]";
+			dataPoints2 += "]";
+			
+			System.out.println(labels1);
+			System.out.println(data1);
+			System.out.println(dataPoints1);
+			System.out.println(dataPoints2);
 			
 			out.print("<script> var ctx1 = document.getElementById(\"myChart1\");");
-			out.print("var myChart1 = new Chart(ctx1, { type: 'bar', data: ");
-			out.print("{labels: " + labels1 + ", "); //State and Year
+			out.print("var myChart1 = new Chart(ctx1, { type: 'line', data: ");
+			out.print("{labels: " + labels1 + ", "); //State
 			out.print("datasets: [{label: 'Candidate 1: " + graphname1 + "', ");
-			out.print("data: "+ data1 +", "); //PopVotes
+			out.print("data: "+ dataPoints1 +", "); //PopVotes
+			//out.print("fill: false, ");
+			out.print("strokeColor: " + backgroundColor1 + ", ");
 			out.print("backgroundColor: " + backgroundColor1 + ", ");
 			out.print("borderColor: " + borderColor1 + ", ");
-			out.print("borderWidth: 1}]}");
+			out.print("borderWidth: 3");
+			out.print("}, {label: 'Candidate 2:  " + graphname2 + "', ");
+			out.print("data: "+ dataPoints2 +", ");
+			//out.print("fill: false, ");
+			out.print("strokeColor: " + backgroundColor2 + ", ");
+			out.print("backgroundColor: " + backgroundColor2 + ", ");
+			out.print("borderColor: " + borderColor2 + ", ");
+			out.print("borderWidth: 3");
+			out.print("}]}");
 			out.print(", options: { responsive: false, scales: { yAxes: [{ ticks: { beginAtZero:true}}] }}});</script>");
+			//out.print(", options: { responsive: false, scales: { xAxes: gridLines:{ color:\"rgba(255,255,255,0.5)\", zeroLineColor:\"rgba(255,255,255,0.5)\" }}],Axes: [{ ticks: { beginAtZero:true}}] }}});</script>");
+			
+			
+			
+			
 			
 			out.print("<script> var ctx = document.getElementById(\"myChart2\");");
 			out.print("var myChart2 = new Chart(ctx, { type: 'bar', data: ");
@@ -203,7 +230,7 @@
 			out.print("backgroundColor: " + backgroundColor2 + ", ");
 			out.print("borderColor: " + borderColor2 + ", ");
 			out.print("borderWidth: 1}]}");
-			out.print(", options: { responsive: false, scales: { yAxes: [{ ticks: { beginAtZero:true}}] }}});</script>");
+			out.print(", options: { responsive: false, scales: { xyAxes: [{ ticks: { beginAtZero:true}}] }}});</script>");
 			
 			//close the connection.
 			con.close();

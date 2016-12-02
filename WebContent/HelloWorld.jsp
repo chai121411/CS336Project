@@ -126,9 +126,7 @@
 		<!-- HAVING PERCENTAGE > 10 20 30 40 50 -->
 		<div class="indent"> Order Results By: 
 				<select name="OrderBy" size=1>
-					<option value="-1">(return results as they come)</option>
 					<option value="PercentageOfVotes DESC">Percentage of votes</option>
-					<option value="Voted DESC"># of people that voted</option>
 					<option value="V.State">State</option>
 				</select>&nbsp;<br>
 			</div>
