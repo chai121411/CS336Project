@@ -58,7 +58,10 @@
 			ResultSet result = stmt.executeQuery(str);
 			
 			//Create chart tag
-			out.print("<canvas id=\"myChart\" width=\"1600\" height=\"2000\"></canvas>");
+			out.print("<canvas id=\"myChart1\" width=\"1200\" height=\"1500\"></canvas>");
+			
+			//Create chart tag
+			out.print("<canvas id=\"myChart2\" width=\"1200\" height=\"1500\"></canvas>");
 			
 			//Make an HTML table to show the results in:
 			out.print("<table>");
@@ -100,10 +103,18 @@
 			String voted;
 			String percent;
 			//Use the these variables to accumulate the chart data
-			String labels = "[";
-			String data = "[";
-			String backgroundColor = "[";
-			String borderColor = "[";
+			String graphname1 = null;
+			String labels1 = "[";
+			String data1 = "[";
+			String backgroundColor1 = "[";
+			String borderColor1 = "[";
+			
+			String graphname2 = null;
+			String labels2 = "[";
+			String data2 = "[";
+			String backgroundColor2 = "[";
+			String borderColor2 = "[";
+			
 			
 			//parse out the results
 			while (result.next()) {
@@ -116,7 +127,7 @@
 				percent = result.getString("PercentageOfVotes");
 				
 				if (percent.length() > 5) {
-					percent = percent.substring(0, percent.indexOf(".") + 3) + "%";
+					percent = percent.substring(0, percent.indexOf(".") + 3);
 				}
 				
 				out.print("<tr>");
@@ -139,45 +150,71 @@
 				out.print(voted);
 				out.print("</td>");
 				out.print("<td>");
-				out.print(percent);
+				out.print(percent + "%");
 				out.print("</td>");
 				out.print("</tr>");
-				/*
-				labels += "\"" + year;
-				labels += state + "\", ";
-				data += popvotes + ", ";
 				
-				backgroundColor += "\"rgba(54, 162, 235, 0.2)\", "; //Blue
-				borderColor += "\"rgba(54, 162, 235, 1)\", ";
-				*/
+				if (year.equals(year1) && lastname.equals(lastname1)) {
+					graphname1 = firstname + " " + lastname + ", " + year;
+					labels1 += "\"" + year;
+					labels1 += state + "\", ";
+					data1 += percent + ", ";
+					backgroundColor1 += "\"rgba(54, 162, 235, 0.2)\", "; //Blue
+					borderColor1 += "\"rgba(54, 162, 235, 1)\", ";
+				} else {
+					graphname2 = firstname + " " + lastname + ", " + year;
+					labels2 += "\"" + year;
+					labels2 += state + "\", ";
+					data2 += percent + ", ";
+					backgroundColor2 += "\"rgba(255, 206, 86, 0.2)\", ";
+					borderColor2 += "\"rgba(255, 206, 86, 1)\", ";
+				}	
 			}
 			
 			out.print("</table>");
-			/*
-			labels = labels.substring(0, labels.length() - 2);
-			data = data.substring(0, data.length() - 2);
-			backgroundColor = backgroundColor.substring(0, backgroundColor.length() - 2);
-			borderColor = borderColor.substring(0, borderColor.length() - 2);
-			labels += "]";
-			data += "]";
-			backgroundColor += "]";
-			borderColor += "]";
-			*/
-			//System.out.println(labels);
-			//System.out.println(data);
-			//System.out.println(backgroundColor);
-			//System.out.println(borderColor);
-			/*
-			out.print("<script> var ctx = document.getElementById(\"myChart\");");
-			out.print("var myChart = new Chart(ctx, { type: 'bar', data: ");
-			out.print("{labels: " + labels + ", "); //State and Year
-			out.print("datasets: [{label: '# of PopVotes', ");
-			out.print("data: "+ data +", "); //PopVotes
-			out.print("backgroundColor: " + backgroundColor + ", ");
-			out.print("borderColor: " + borderColor + ", ");
+			
+			labels1 = labels1.substring(0, labels1.length() - 2);
+			data1 = data1.substring(0, data1.length() - 2);
+			backgroundColor1 = backgroundColor1.substring(0, backgroundColor1.length() - 2);
+			borderColor1 = borderColor1.substring(0, borderColor1.length() - 2);
+			labels1 += "]";
+			data1 += "]";
+			backgroundColor1 += "]";
+			borderColor1 += "]";
+			
+			labels2 = labels2.substring(0, labels2.length() - 2);
+			data2 = data2.substring(0, data2.length() - 2);
+			backgroundColor2 = backgroundColor2.substring(0, backgroundColor2.length() - 2);
+			borderColor2 = borderColor2.substring(0, borderColor2.length() - 2);
+			labels2 += "]";
+			data2 += "]";
+			backgroundColor2 += "]";
+			borderColor2 += "]";
+			
+			System.out.println(labels1);
+			System.out.println(data1);
+			System.out.println(backgroundColor1);
+			System.out.println(borderColor1);
+			
+			out.print("<script> var ctx1 = document.getElementById(\"myChart1\");");
+			out.print("var myChart1 = new Chart(ctx1, { type: 'bar', data: ");
+			out.print("{labels: " + labels1 + ", "); //State and Year
+			out.print("datasets: [{label: 'Candidate 1: " + graphname1 + "', ");
+			out.print("data: "+ data1 +", "); //PopVotes
+			out.print("backgroundColor: " + backgroundColor1 + ", ");
+			out.print("borderColor: " + borderColor1 + ", ");
 			out.print("borderWidth: 1}]}");
 			out.print(", options: { responsive: false, scales: { yAxes: [{ ticks: { beginAtZero:true}}] }}});</script>");
-			*/
+			
+			out.print("<script> var ctx = document.getElementById(\"myChart2\");");
+			out.print("var myChart2 = new Chart(ctx, { type: 'bar', data: ");
+			out.print("{labels: " + labels2 + ", "); //State and Year
+			out.print("datasets: [{label: 'Candidate 2: " + graphname2 +"', ");
+			out.print("data: "+ data2 +", "); //PopVotes
+			out.print("backgroundColor: " + backgroundColor2 + ", ");
+			out.print("borderColor: " + borderColor2 + ", ");
+			out.print("borderWidth: 1}]}");
+			out.print(", options: { responsive: false, scales: { yAxes: [{ ticks: { beginAtZero:true}}] }}});</script>");
 			//close the connection.
 			con.close();
 

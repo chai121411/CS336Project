@@ -85,7 +85,8 @@
 		</form>
 	
 	<hr>
-	<h3>Percentage of Votes By State</h4>
+	<h3>Percentage of Votes By State </h4>
+	<p>See how many votes a candidate took from a state.</p>
 	<p>Choose the voting results of two candidates to compare!</p>
 	<form method="query" action="percent.jsp">
 		<div class="indent">From Year: 
