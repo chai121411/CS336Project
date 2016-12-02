@@ -35,6 +35,7 @@
 			String year2 = request.getParameter("Year2");
 			String lastname1 = request.getParameter("Candidate1");
 			String lastname2 = request.getParameter("Candidate2");
+			String orderby = request.getParameter("OrderBy");
 			
 			String str; //the query string
 			
@@ -43,8 +44,10 @@
 			str = "SELECT *, (V.PopVotes/ST.Voted)*100 AS PercentageOfVotes FROM Votes AS V ";
 			str += "JOIN States AS ST ON (V.Year = ST.Year AND V.State = ST.State) ";
 			str += "WHERE (V.Year = " + year1 + " AND V.LastName = \"" + lastname1 + "\"";
-			str += ") OR (V.Year = " + year2 + " AND V.LastName = \"" + lastname1 + "\")";
-			
+			str += ") OR (V.Year = " + year2 + " AND V.LastName = \"" + lastname2 + "\")";
+			if (!orderby.equals("-1")) {
+				str += "ORDER BY " + orderby;
+			}			
 			System.out.println(year1);
 			System.out.println(year2);
 			System.out.println(lastname1);
@@ -111,6 +114,10 @@
 				popvotes = result.getString("PopVotes");
 				voted = result.getString("Voted");
 				percent = result.getString("PercentageOfVotes");
+				
+				if (percent.length() > 5) {
+					percent = percent.substring(0, percent.indexOf(".") + 3) + "%";
+				}
 				
 				out.print("<tr>");
 				out.print("<td>");

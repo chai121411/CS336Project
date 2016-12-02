@@ -85,8 +85,8 @@
 		</form>
 	
 	<hr>
-	<h3>Percentage of Votes From State</h4>
-	<p>Choose two candidates to compare!</p>
+	<h3>Percentage of Votes By State</h4>
+	<p>Choose the voting results of two candidates to compare!</p>
 	<form method="query" action="percent.jsp">
 		<div class="indent">From Year: 
 			<select id="Year1" name="Year1" size=1 onchange="javascript: dynamicdropdown(this.options[this.selectedIndex].value);"> 
@@ -120,6 +120,14 @@
 		 		<option value="Clinton">Bill Clinton</option>
 			</select>&nbsp;
 		</div>
+		<div class="indent"> Order Results By: 
+				<select name="OrderBy" size=1>
+					<option value="-1">(return results as they come)</option>
+					<option value="PercentageOfVotes DESC">Percentage of votes</option>
+					<option value="Voted DESC"># of people that voted</option>
+					<option value="V.State">State</option>
+				</select>&nbsp;<br>
+			</div>
 		<input type="submit" value="submit">
 	</form>
 	
