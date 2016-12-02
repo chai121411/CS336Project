@@ -121,6 +121,7 @@
 		 		<option value="Clinton">Bill Clinton</option>
 			</select>&nbsp;
 		</div>
+		<!-- HAVING PERCENTAGE > 10 20 30 40 50 -->
 		<div class="indent"> Order Results By: 
 				<select name="OrderBy" size=1>
 					<option value="-1">(return results as they come)</option>
@@ -133,21 +134,6 @@
 	</form>
 	
 	<hr>
-	
-	<p>hi</p>
-	<p>hi</p>
-	<p>hi</p>
-	<p>hi</p>
-	<p>hi</p>
-	<p>hi</p>
-	<p>hi</p>
-	<p>hi</p>
-	<p>hi</p>
-	<p>hi</p>
-	<p>hi</p>
-	<p>hi</p>
-	<p>hi</p>
-
 
 	<script>
 		$(document).ready(function() {

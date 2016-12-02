@@ -30,7 +30,7 @@
 			
 			//Create a SQL statement
 			Statement stmt = con.createStatement();
-			//Get the combobox from the HelloWorld.jsp
+			
 			String year1 = request.getParameter("Year1");
 			String year2 = request.getParameter("Year2");
 			String lastname1 = request.getParameter("Candidate1");
@@ -39,8 +39,7 @@
 			
 			String str; //the query string
 			
-			//Make a SELECT query from the Votes table with the range specified by the 'PopVotes' parameter at the HelloWorld.jsp
-			
+			//Perform percentage query based on parameters from selections
 			str = "SELECT *, (V.PopVotes/ST.Voted)*100 AS PercentageOfVotes FROM Votes AS V ";
 			str += "JOIN States AS ST ON (V.Year = ST.Year AND V.State = ST.State) ";
 			str += "WHERE (V.Year = " + year1 + " AND V.LastName = \"" + lastname1 + "\"";
@@ -48,10 +47,10 @@
 			if (!orderby.equals("-1")) {
 				str += "ORDER BY " + orderby;
 			}			
-			System.out.println(year1);
-			System.out.println(year2);
-			System.out.println(lastname1);
-			System.out.println(lastname2);
+			//System.out.println(year1);
+			//System.out.println(year2);
+			//System.out.println(lastname1);
+			//System.out.println(lastname2);
 			
 			System.out.println(str);
 			//Run the query against the database.
@@ -66,18 +65,13 @@
 			//Make an HTML table to show the results in:
 			out.print("<table>");
 			
-			//make a row
 			out.print("<tr>");
-			//make a column
 			out.print("<td>");
-			//print out column header
 			out.print("Year");
 			out.print("</td>");
-			//make a column
 			out.print("<td>");
 			out.print("FirstName");
 			out.print("</td>");
-			//make a column
 			out.print("<td>");
 			out.print("LastName");
 			out.print("</td>");
@@ -95,6 +89,7 @@
 			out.print("</td>");
 			out.print("</tr>");
 			
+			//projections
 			String year;
 			String firstname;
 			String lastname;
@@ -102,14 +97,15 @@
 			String popvotes;
 			String voted;
 			String percent;
+			
 			//Use the these variables to accumulate the chart data
-			String graphname1 = null;
+			String graphname1 = lastname1 + ", " + year1;
 			String labels1 = "[";
 			String data1 = "[";
 			String backgroundColor1 = "[";
 			String borderColor1 = "[";
 			
-			String graphname2 = null;
+			String graphname2 = lastname2 + ", " + year2;
 			String labels2 = "[";
 			String data2 = "[";
 			String backgroundColor2 = "[";
@@ -155,14 +151,12 @@
 				out.print("</tr>");
 				
 				if (year.equals(year1) && lastname.equals(lastname1)) {
-					graphname1 = firstname + " " + lastname + ", " + year;
 					labels1 += "\"" + year;
 					labels1 += state + "\", ";
 					data1 += percent + ", ";
 					backgroundColor1 += "\"rgba(54, 162, 235, 0.2)\", "; //Blue
 					borderColor1 += "\"rgba(54, 162, 235, 1)\", ";
 				} else {
-					graphname2 = firstname + " " + lastname + ", " + year;
 					labels2 += "\"" + year;
 					labels2 += state + "\", ";
 					data2 += percent + ", ";
@@ -191,11 +185,6 @@
 			backgroundColor2 += "]";
 			borderColor2 += "]";
 			
-			System.out.println(labels1);
-			System.out.println(data1);
-			System.out.println(backgroundColor1);
-			System.out.println(borderColor1);
-			
 			out.print("<script> var ctx1 = document.getElementById(\"myChart1\");");
 			out.print("var myChart1 = new Chart(ctx1, { type: 'bar', data: ");
 			out.print("{labels: " + labels1 + ", "); //State and Year
@@ -215,6 +204,7 @@
 			out.print("borderColor: " + borderColor2 + ", ");
 			out.print("borderWidth: 1}]}");
 			out.print(", options: { responsive: false, scales: { yAxes: [{ ticks: { beginAtZero:true}}] }}});</script>");
+			
 			//close the connection.
 			con.close();
 

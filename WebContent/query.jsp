@@ -16,7 +16,6 @@
 </head>
 <body>
 	<%
-		List<String> list = new ArrayList<String>();
 
 		try {
 
@@ -73,9 +72,11 @@
 			out.print("</td>");
 			out.print("</tr>");
 			
+			//projections
 			String year;
 			String state;
 			String popvotes;
+			
 			//Use the these variables to accumulate the chart data
 			String labels = "[";
 			String data = "[";
