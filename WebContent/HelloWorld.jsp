@@ -16,10 +16,12 @@
 	<nav>
 	<ul class="topnav" id="myTopnav">
 		<li id="navbartitle">Voting Trends 1996 - 2012</li>
-		<li><a href="#selectall">select all</a></li>
+		<li><a href="#percentagevotes">Percentage of States Query</a></li>
 		<li><a href="#popularvotes">Popular Votes Query</a></li>
+		<li><a href="#selectall">SELECT ALL</a></li>
 	</ul>
     </nav>
+    
 </head>
 <body>
 	
@@ -84,7 +86,7 @@
 			<input type="submit" value="submit">
 		</form>
 	
-	<hr>
+	<hr id=percentagevotes>
 	<h3>Percentage of Votes By State </h4>
 	<p>See how many votes a candidate took from a state.</p>
 	<p>Choose the voting results of two candidates to compare!</p>
@@ -136,6 +138,8 @@
 	<hr>
 
 	<script>
+		<!-- java script to help with dynamic dropdown/error detection-->
+		
 		$(document).ready(function() {
 			$("#selectallform").submit(function() {
 				if (!$("input[name=command]:checked").val()) {
@@ -212,7 +216,5 @@ Aggregate the Result?:
 			<option value="MIN">Min</option>
 		</select>&nbsp;<br>
 -->
-
-
 </body>
 </html>
