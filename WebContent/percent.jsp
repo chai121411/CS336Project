@@ -31,20 +31,25 @@
 			//Create a SQL statement
 			Statement stmt = con.createStatement();
 			//Get the combobox from the HelloWorld.jsp
-			String year_entity = request.getParameter("Year");
-			String popvotes_entity = request.getParameter("PopVotes");
-			String orderby_entity = request.getParameter("OrderBy");
+			String year1 = request.getParameter("Year1");
+			String year2 = request.getParameter("Year2");
+			String lastname1 = request.getParameter("Candidate1");
+			String lastname2 = request.getParameter("Candidate2");
+			
 			String str; //the query string
 			
 			//Make a SELECT query from the Votes table with the range specified by the 'PopVotes' parameter at the HelloWorld.jsp
 			
-			str = "SELECT * FROM Votes WHERE PopVotes >= " + popvotes_entity;	
+			str = "SELECT *, (V.PopVotes/ST.Voted)*100 AS PercentageOfVotes FROM Votes AS V ";
+			str += "JOIN States AS ST ON (V.Year = ST.Year AND V.State = ST.State) ";
+			str += "WHERE (V.Year = " + year1 + " AND V.LastName = \"" + lastname1 + "\"";
+			str += ") OR (V.Year = " + year2 + " AND V.LastName = \"" + lastname1 + "\")";
 			
-			if (!year_entity.equals("-1")) {
-				str += " AND Year = " + year_entity;
-			}
+			System.out.println(year1);
+			System.out.println(year2);
+			System.out.println(lastname1);
+			System.out.println(lastname2);
 			
-			str += " ORDER BY " + orderby_entity;
 			System.out.println(str);
 			//Run the query against the database.
 			ResultSet result = stmt.executeQuery(str);
@@ -55,7 +60,6 @@
 			//Make an HTML table to show the results in:
 			out.print("<table>");
 			
-			
 			//make a row
 			out.print("<tr>");
 			//make a column
@@ -65,17 +69,33 @@
 			out.print("</td>");
 			//make a column
 			out.print("<td>");
-			out.print("State");
+			out.print("FirstName");
 			out.print("</td>");
 			//make a column
 			out.print("<td>");
-			out.print("Popular Votes");
+			out.print("LastName");
+			out.print("</td>");
+			out.print("<td>");
+			out.print("State");
+			out.print("</td>");
+			out.print("<td>");
+			out.print("PopVotes");
+			out.print("</td>");
+			out.print("<td>");
+			out.print("# Of People Voted");
+			out.print("</td>");
+			out.print("<td>");
+			out.print("% Of Votes");
 			out.print("</td>");
 			out.print("</tr>");
 			
 			String year;
+			String firstname;
+			String lastname;
 			String state;
 			String popvotes;
+			String voted;
+			String percent;
 			//Use the these variables to accumulate the chart data
 			String labels = "[";
 			String data = "[";
@@ -85,36 +105,48 @@
 			//parse out the results
 			while (result.next()) {
 				year = result.getString("Year");
-				popvotes = result.getString("PopVotes");
+				firstname = result.getString("FirstName");
+				lastname = result.getString("LastName");
 				state = result.getString("State");
+				popvotes = result.getString("PopVotes");
+				voted = result.getString("Voted");
+				percent = result.getString("PercentageOfVotes");
 				
-				//make a row
 				out.print("<tr>");
-				//make a column
 				out.print("<td>");
-				//Print out current votes year:
 				out.print(year);
 				out.print("</td>");
 				out.print("<td>");
-				//Print out current state voting:
+				out.print(firstname);
+				out.print("</td>");
+				out.print("<td>");
+				out.print(lastname);
+				out.print("</td>");
+				out.print("<td>");
 				out.print(state);
 				out.print("</td>");
 				out.print("<td>");
-				//Print out the number of popular votes
 				out.print(popvotes);
 				out.print("</td>");
+				out.print("<td>");
+				out.print(voted);
+				out.print("</td>");
+				out.print("<td>");
+				out.print(percent);
+				out.print("</td>");
 				out.print("</tr>");
-				
+				/*
 				labels += "\"" + year;
 				labels += state + "\", ";
 				data += popvotes + ", ";
 				
 				backgroundColor += "\"rgba(54, 162, 235, 0.2)\", "; //Blue
 				borderColor += "\"rgba(54, 162, 235, 1)\", ";
+				*/
 			}
 			
 			out.print("</table>");
-			
+			/*
 			labels = labels.substring(0, labels.length() - 2);
 			data = data.substring(0, data.length() - 2);
 			backgroundColor = backgroundColor.substring(0, backgroundColor.length() - 2);
@@ -123,12 +155,12 @@
 			data += "]";
 			backgroundColor += "]";
 			borderColor += "]";
-			
+			*/
 			//System.out.println(labels);
 			//System.out.println(data);
 			//System.out.println(backgroundColor);
 			//System.out.println(borderColor);
-			
+			/*
 			out.print("<script> var ctx = document.getElementById(\"myChart\");");
 			out.print("var myChart = new Chart(ctx, { type: 'bar', data: ");
 			out.print("{labels: " + labels + ", "); //State and Year
@@ -138,6 +170,7 @@
 			out.print("borderColor: " + borderColor + ", ");
 			out.print("borderWidth: 1}]}");
 			out.print(", options: { responsive: false, scales: { yAxes: [{ ticks: { beginAtZero:true}}] }}});</script>");
+			*/
 			//close the connection.
 			con.close();
 

@@ -85,10 +85,42 @@
 		</form>
 	
 	<hr>
-	<h3>Aggregate</h4>
-	<p>Percentage...</p>
-	<form method="query" action="query.jsp">
-		
+	<h3>Percentage of Votes From State</h4>
+	<p>Choose two candidates to compare!</p>
+	<form method="query" action="percent.jsp">
+		<div class="indent">From Year: 
+			<select id="Year1" name="Year1" size=1 onchange="javascript: dynamicdropdown(this.options[this.selectedIndex].value);"> 
+				<option value="1996">1996</option>
+				<option value="2000">2000</option>
+				<option value="2004">2004</option>
+				<option value="2008">2008</option>
+				<option value="2012">2012</option>
+			</select>&nbsp;&nbsp;&nbsp; ,&nbsp; Candidate:
+			<select id="Candidate1" name="Candidate1" size=1>
+		 		<option value="Dole">Bob Dole</option> 
+		 		<option value="Clinton">Bill Clinton</option>
+			    <!--<option value="Bush">George Bush</option>
+				<option value="Gore">Al Gore</option>
+				<option value="Kerry">John Kerry</option>
+				<option value="McCain">John McCain</option>
+				<option value="Obama">Barack Obama</option>
+				<option value="Romney">Mitt Romney</option>-->
+			</select>&nbsp;
+		</div>
+		<div class="indent">From Year: 
+			<select id="Year2" name="Year2" size=1 onchange="javascript: dynamicdropdown2(this.options[this.selectedIndex].value);"> 
+				<option value="1996">1996</option>
+				<option value="2000">2000</option>
+				<option value="2004">2004</option>
+				<option value="2008">2008</option>
+				<option value="2012">2012</option>
+			</select>&nbsp;&nbsp;&nbsp; ,&nbsp; Candidate:
+			<select id="Candidate2" name="Candidate2" size=1>
+		 		<option value="Dole">Bob Dole</option> 
+		 		<option value="Clinton">Bill Clinton</option>
+			</select>&nbsp;
+		</div>
+		<input type="submit" value="submit">
 	</form>
 	
 	<hr>
@@ -116,7 +148,63 @@
 				  return false;
 				}
 			});
+			
 		});
+		
+		
+	    function dynamicdropdown(listindex) {
+	    	document.getElementById("Candidate1").options.length = 0;
+	        switch (listindex) {
+	        case "1996" :
+	            document.getElementById("Candidate1").options[0]=new Option("Bob Dole","Dole");
+	            document.getElementById("Candidate1").options[1]=new Option("Bill Clinton","Clinton");
+	        	break;
+	        case "2000" :
+	            document.getElementById("Candidate1").options[0]=new Option("George Bush","Bush");
+	            document.getElementById("Candidate1").options[1]=new Option("Al Gore","Gore");
+	            break;
+	        case "2004" :
+	            document.getElementById("Candidate1").options[0]=new Option("George Bush","Bush");
+	            document.getElementById("Candidate1").options[1]=new Option("John Kerry","Kerry");
+	            break;
+	        case "2008" :
+	            document.getElementById("Candidate1").options[0]=new Option("John McCain","McCain");
+	            document.getElementById("Candidate1").options[1]=new Option("Barack Obama","Obama");
+	            break;
+	        case "2012" :
+	            document.getElementById("Candidate1").options[0]=new Option("Mitt Romney","Romney");
+	            document.getElementById("Candidate1").options[1]=new Option("Barack Obama","Obama");
+	            break;
+	        }
+	        return true;
+	    }
+	    
+	    function dynamicdropdown2(listindex) {
+	    	document.getElementById("Candidate2").options.length = 0;
+	        switch (listindex) {
+	        case "1996" :
+	            document.getElementById("Candidate2").options[0]=new Option("Bob Dole","Dole");
+	            document.getElementById("Candidate2").options[1]=new Option("Bill Clinton","Clinton");
+	        	break;
+	        case "2000" :
+	            document.getElementById("Candidate2").options[0]=new Option("George Bush","Bush");
+	            document.getElementById("Candidate2").options[1]=new Option("Al Gore","Gore");
+	            break;
+	        case "2004" :
+	            document.getElementById("Candidate2").options[0]=new Option("George Bush","Bush");
+	            document.getElementById("Candidate2").options[1]=new Option("John Kerry","Kerry");
+	            break;
+	        case "2008" :
+	            document.getElementById("Candidate2").options[0]=new Option("John McCain","McCain");
+	            document.getElementById("Candidate2").options[1]=new Option("Barack Obama","Obama");
+	            break;
+	        case "2012" :
+	            document.getElementById("Candidate2").options[0]=new Option("Mitt Romney","Romney");
+	            document.getElementById("Candidate2").options[1]=new Option("Barack Obama","Obama");
+	            break;
+	        }
+	        return true;
+	    }
 	</script>
 
 <!--
