@@ -90,7 +90,7 @@
 	<h3>Percentage of Votes By State </h4>
 	<p>See how many votes a candidate took from a state.</p>
 	<p>Choose the voting results of two candidates to compare!</p>
-	<form method="query" action="percent.jsp">
+	<form method="query" action="percent.jsp" id="percentagevoteform">
 		<div class="indent">From Year: 
 			<select id="Year1" name="Year1" size=1 onchange="javascript: dynamicdropdown(this.options[this.selectedIndex].value);"> 
 				<option value="1996">1996</option>
@@ -144,6 +144,13 @@
 				  alert('Nothing is checked in Select * Form!');
 				  return false;
 				}
+			});
+			
+			$("#percentagevoteform").submit(function() {
+				if ( $('#Year1').val() == $('#Year2').val()  && $('#Candidate1').val() == $('#Candidate2').val()) {
+			        alert("Please select two different candidates. You selected the same candidate from the same year.");
+			         return false;
+			    }
 			});
 			
 		});

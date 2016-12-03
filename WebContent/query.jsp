@@ -49,11 +49,10 @@
 			ResultSet result = stmt.executeQuery(str);
 			
 			//Create chart tag
-			out.print("<canvas id=\"myChart\" width=\"1600\" height=\"2000\"></canvas>");
+			out.print("<canvas id=\"myChart\" width=\"1100\" height=\"960\"></canvas>");
 			
 			//Make an HTML table to show the results in:
 			out.print("<table>");
-			
 			
 			//make a row
 			out.print("<tr>");
