@@ -203,14 +203,19 @@
 			out.print("datasets: [{label: 'Candidate 1: " + graphname1 + "', ");
 			out.print("data: "+ dataPoints1 +", "); //PopVotes
 			out.print("fill: false, ");
-			//out.print("backgroundColor: " + backgroundColor1 + ", ");
-			out.print("borderColor: 'rgba(220,180,180,1)', ");
+			out.print("pointBackgroundColor : 'rgba(100,100,100)', ");
+			out.print("pointBorderColor : 'rgba(100,100,100)', ");
+			//out.print("backgroundColor: 'rgb(238, 235, 222, 0.1)', ");
+			out.print("borderColor: 'rgba(240,0,0,0.5)', ");
 			out.print("borderWidth: 3");
+			
 			out.print("}, {label: 'Candidate 2:  " + graphname2 + "', ");
 			out.print("data: "+ dataPoints2 +", ");
 			out.print("fill: false, ");
-			//out.print("backgroundColor: " + backgroundColor2 + ", ");
-			out.print("borderColor: 'rgba(151,187,205,1)', ");
+			out.print("pointBackgroundColor : 'rgba(180,180,180)', ");
+			out.print("pointBorderColor : 'rgba(180,180,180)', ");
+			//out.print("backgroundColor: 'rgb(207, 234, 243, 0.2)', ");
+			out.print("borderColor: 'rgba(0,0,240,0.5)', ");
 			out.print("borderWidth: 3");
 			out.print("}]}");
 			out.print(", options: { responsive: false, scales: { yAxes: [{ ticks: { beginAtZero:true}}] }}});</script>");
