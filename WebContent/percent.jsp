@@ -45,7 +45,7 @@
 			str += "WHERE (V.Year = " + year1 + " AND V.LastName = \"" + lastname1 + "\"";
 			str += ") OR (V.Year = " + year2 + " AND V.LastName = \"" + lastname2 + "\")";
 			if (!orderby.equals("-1")) {
-				str += "ORDER BY " + orderby;
+				str += " ORDER BY " + orderby;
 			}			
 			//System.out.println(year1);
 			//System.out.println(year2);
@@ -57,7 +57,7 @@
 			ResultSet result = stmt.executeQuery(str);
 			
 			//Create chart tag
-			out.print("<canvas id=\"myChart1\" width=\"1100\" height=\"960\"></canvas>");
+			out.print("<canvas id=\"myChart1\" width=\"900\" height=\"960\"></canvas>");
 			
 			//Create chart tag
 			//out.print("<canvas id=\"myChart2\" width=\"1200\" height=\"1500\"></canvas>");
