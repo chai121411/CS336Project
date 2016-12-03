@@ -15,6 +15,10 @@
 	<link rel="stylesheet" type="text/css" href="table.css">	
 </head>
 <body>
+
+<button onclick="location.href = 'HelloWorld.jsp'" style="color:blue"><b>Home</b></button>
+<h2 style = "text-align:center;"> Visual Representation of Results </h2>
+
 	<%
 		List<String> list = new ArrayList<String>();
 
@@ -62,7 +66,10 @@
 			//Create chart tag
 			//out.print("<canvas id=\"myChart2\" width=\"1200\" height=\"1500\"></canvas>");
 			
-			//Make an HTML table to show the results in:
+			
+			//Make an HTML table to show the results in:	
+			out.print("<br/>");
+			out.print("<h2> Table Representation of Results </h2>");
 			out.print("<table>");
 			
 			out.print("<tr>");
@@ -183,7 +190,7 @@
 			out.print("<script> var ctx1 = document.getElementById(\"myChart1\");");
 			out.print("var myChart1 = new Chart(ctx1, { type: 'line', data: ");
 			out.print("{labels: " + labels1 + ", "); //State
-			out.print("datasets: [{label: 'Candidate 1: " + graphname1 + "', ");
+			out.print("datasets: [{label: '" + graphname1 + "', ");
 			out.print("data: "+ dataPoints1 +", "); //PopVotes
 			out.print("fill: false, ");
 			out.print("pointBackgroundColor : 'rgba(100,100,100)', ");
@@ -192,7 +199,7 @@
 			out.print("borderColor: 'rgba(240,0,0,0.5)', ");
 			out.print("borderWidth: 3");
 			
-			out.print("}, {label: 'Candidate 2:  " + graphname2 + "', ");
+			out.print("}, {label: '" + graphname2 + "', ");
 			out.print("data: "+ dataPoints2 +", ");
 			out.print("fill: false, ");
 			out.print("pointBackgroundColor : 'rgba(180,180,180)', ");

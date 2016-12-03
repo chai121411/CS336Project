@@ -39,7 +39,7 @@
 		<div class="indent">
 		<input type="radio" name="command" value="States"/>Let's go to a State!
 		</div>
-		<input type="submit" value="submit" />
+		<input type="submit" value="submit"  style = "width:5em; height:2.5em"/>
 	</form>
 
 	<hr id=popularvotes>
@@ -83,7 +83,7 @@
 					<option value="PopVotes DESC">Popular Votes</option>
 				</select>&nbsp;<br>
 			</div>	
-			<input type="submit" value="submit">
+			<input type="submit" value="submit" style = "width:5em; height:2.5em">
 		</form>
 	
 	<hr id=percentagevotes>
@@ -130,7 +130,7 @@
 					<option value="PercentageOfVotes DESC">Percentage of votes</option>
 				</select>&nbsp;<br>
 			</div>
-		<input type="submit" value="submit">
+		<input type="submit" value="submit" style = "width:5em; height:2.5em">
 	</form>
 	
 	<hr>

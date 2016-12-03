@@ -15,6 +15,10 @@
 	<link rel="stylesheet" type="text/css" href="table.css">	
 </head>
 <body>
+
+<button onclick="location.href = 'HelloWorld.jsp'" style="color:blue"><b>Home</b></button>
+<h2 style = "text-align:center;"> Visual Representation of Results </h2>
+
 	<%
 
 		try {
@@ -52,6 +56,8 @@
 			out.print("<canvas id=\"myChart\" width=\"1100\" height=\"960\"></canvas>");
 			
 			//Make an HTML table to show the results in:
+			out.print("<br/>");
+			out.print("<h2> Table Representation of Results </h2>");	
 			out.print("<table>");
 			
 			//make a row
