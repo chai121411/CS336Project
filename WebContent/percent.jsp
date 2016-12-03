@@ -202,17 +202,15 @@
 			out.print("{labels: " + labels1 + ", "); //State
 			out.print("datasets: [{label: 'Candidate 1: " + graphname1 + "', ");
 			out.print("data: "+ dataPoints1 +", "); //PopVotes
-			//out.print("fill: false, ");
-			out.print("strokeColor: " + backgroundColor1 + ", ");
-			out.print("backgroundColor: " + backgroundColor1 + ", ");
-			out.print("borderColor: " + borderColor1 + ", ");
+			out.print("fill: false, ");
+			//out.print("backgroundColor: " + backgroundColor1 + ", ");
+			out.print("borderColor: 'rgba(220,180,180,1)', ");
 			out.print("borderWidth: 3");
 			out.print("}, {label: 'Candidate 2:  " + graphname2 + "', ");
 			out.print("data: "+ dataPoints2 +", ");
-			//out.print("fill: false, ");
-			out.print("strokeColor: " + backgroundColor2 + ", ");
-			out.print("backgroundColor: " + backgroundColor2 + ", ");
-			out.print("borderColor: " + borderColor2 + ", ");
+			out.print("fill: false, ");
+			//out.print("backgroundColor: " + backgroundColor2 + ", ");
+			out.print("borderColor: 'rgba(151,187,205,1)', ");
 			out.print("borderWidth: 3");
 			out.print("}]}");
 			out.print(", options: { responsive: false, scales: { yAxes: [{ ticks: { beginAtZero:true}}] }}});</script>");
