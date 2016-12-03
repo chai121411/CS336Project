@@ -9,10 +9,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Query Results</title>
 
-	<script type="text/javascript" src="jquery-2.1.1.min.js"></script>
-	<script type="text/javascript" src="Chart.min.js"></script>
+	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="js/Chart.min.js"></script>
 
-	<link rel="stylesheet" type="text/css" href="table.css">	
+	<link rel="stylesheet" type="text/css" href="css/table.css">	
 </head>
 <body>
 
@@ -37,23 +37,37 @@
 			String year_entity = request.getParameter("Year");
 			String popvotes_entity = request.getParameter("PopVotes");
 			String orderby_entity = request.getParameter("OrderBy");
+			String aggr = request.getParameter("Aggregate");
 			String str; //the query string
 			
 			//Make a SELECT query from the Votes table with the range specified by the 'PopVotes' parameter at the HelloWorld.jsp
-			
-			str = "SELECT * FROM Votes WHERE PopVotes >= " + popvotes_entity;	
-			
-			if (!year_entity.equals("-1")) {
-				str += " AND Year = " + year_entity;
+			if (!aggr.equals("-1")) {
+				str = "SELECT *, SUM(PopVotes) AS SPV FROM Votes";
+				if (!year_entity.equals("-1")) {
+					str += " WHERE Year = " + year_entity;
+				}
+				str += " GROUP BY Year, State";
+				str += " HAVING SUM(PopVotes) >= " + popvotes_entity;
+				str += " ORDER BY " + orderby_entity;
+				
+			} else {
+				str = "SELECT * FROM Votes WHERE PopVotes >= " + popvotes_entity;	
+				if (!year_entity.equals("-1")) {
+					str += " AND Year = " + year_entity;
+				}
+				str += " ORDER BY " + orderby_entity;
 			}
 			
-			str += " ORDER BY " + orderby_entity;
 			System.out.println(str);
 			//Run the query against the database.
 			ResultSet result = stmt.executeQuery(str);
 			
 			//Create chart tag
-			out.print("<canvas id=\"myChart\" width=\"1100\" height=\"960\"></canvas>");
+			if (!year_entity.equals("-1")) {
+				out.print("<canvas id=\"myChart\" width=\"1100\" height=\"960\"></canvas>");
+			} else {
+				out.print("<canvas id=\"myChart\" width=\"1400\" height=\"1180\"></canvas>");	
+			}
 			
 			//Make an HTML table to show the results in:
 			out.print("<br/>");
@@ -88,10 +102,16 @@
 			String backgroundColor = "[";
 			String borderColor = "[";
 			
+			String pv_project = "PopVotes";
+			
+			if (!aggr.equals("-1")) {
+				pv_project = "SPV"; //pv may be different depending on user input
+			}
+			
 			//parse out the results
 			while (result.next()) {
 				year = result.getString("Year");
-				popvotes = result.getString("PopVotes");
+				popvotes = result.getString(pv_project);
 				state = result.getString("State");
 				
 				//make a row

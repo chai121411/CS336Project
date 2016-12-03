@@ -9,10 +9,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>Query Results</title>
 
-	<script type="text/javascript" src="jquery-2.1.1.min.js"></script>
-	<script type="text/javascript" src="Chart.min.js"></script>
+	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="js/Chart.min.js"></script>
 
-	<link rel="stylesheet" type="text/css" href="table.css">	
+	<link rel="stylesheet" type="text/css" href="css/table.css">	
 </head>
 <body>
 
