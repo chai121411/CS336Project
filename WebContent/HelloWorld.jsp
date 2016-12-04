@@ -88,7 +88,7 @@
 					<option value="-1">No</option>
 				</select>&nbsp;<br>
 			</div>
-			<div class="indent"> Order results By: 
+			<div class="indent"> Order results by: 
 				<select id="queryOrderBy" name="OrderBy" size=1>
 					<option value="Year ASC, State ASC">Year and State</option>
 					<option value="State ASC">State</option>
@@ -106,14 +106,14 @@
 		<p><i> A candidate is identified by a year and name.</i></p>
 	</div>
 	<form method="query" action="percent.jsp" id="percentagevoteform">
-		<div class="indent">From Year: 
+		<div class="indent">Candidate 1 - from Year: 
 			<select id="Year1" name="Year1" size=1 onchange="javascript: dynamicdropdown(this.options[this.selectedIndex].value);"> 
 				<option value="1996">1996</option>
 				<option value="2000">2000</option>
 				<option value="2004">2004</option>
 				<option value="2008">2008</option>
 				<option value="2012">2012</option>
-			</select>&nbsp;&nbsp;&nbsp; ,&nbsp; Candidate:
+			</select>&nbsp;&nbsp;&nbsp; ,&nbsp; Name:
 			<select id="Candidate1" name="Candidate1" size=1>
 		 		<option value="Dole">Bob Dole</option> 
 		 		<option value="Clinton">Bill Clinton</option>
@@ -125,20 +125,20 @@
 				<option value="Romney">Mitt Romney</option>-->
 			</select>&nbsp;
 		</div>
-		<div class="indent">From Year: 
+		<div class="indent">Candidate 2 - from Year: 
 			<select id="Year2" name="Year2" size=1 onchange="javascript: dynamicdropdown2(this.options[this.selectedIndex].value);"> 
 				<option value="1996">1996</option>
 				<option value="2000">2000</option>
 				<option value="2004">2004</option>
 				<option value="2008">2008</option>
 				<option value="2012">2012</option>
-			</select>&nbsp;&nbsp;&nbsp; ,&nbsp; Candidate:
+			</select>&nbsp;&nbsp;&nbsp; ,&nbsp; Name:
 			<select id="Candidate2" name="Candidate2" size=1>
 		 		<option value="Dole">Bob Dole</option> 
 		 		<option value="Clinton">Bill Clinton</option>
 			</select>&nbsp;
 		</div>
-		<div class="indent"> Order Results By: 
+		<div class="indent"> Order results by: 
 				<select name="OrderBy" size=1>
 					<option value="V.State">State</option>
 					<option value="PercentageOfVotes DESC">Percentage of votes</option>
@@ -148,17 +148,25 @@
 	</form>
 	
 	<hr id=aggr_query>
-	<h3>Aggregation Query</h3>
-	<p>Unimplemented</p>
-		<form method="query" action="aggr.jsp">
-			<div class="indent">Year: 
-				<select name="Year" size=1>
-					<option value="-1">All years</option>
-					<option value="1996">Only 1996</option>
-					<option value="2000">Only 2000</option>
-					<option value="2004">Only 2004</option>
-					<option value="2008">Only 2008</option>
-					<option value="2012">Only 2012</option>
+	<h3>Aggregation Query about States</h3>
+	<p>Look at some census information about states, aggregated across a selection years</p>
+		<form method="query" action="aggr.jsp" id="aggrform">
+			<i>Check off all the years you would like aggregate</i>
+			<div class="indent">
+				&nbsp;&nbsp;&nbsp;
+				<input type="radio" name="year_aggr1" value="1996"/>1996
+				<input type="radio" name="year_aggr2" value="2000"/>2000
+				<input type="radio" name="year_aggr3" value="2004"/>2004
+				<input type="radio" name="year_aggr4" value="2008"/>2008
+				<input type="radio" name="year_aggr5" value="2012"/>2012
+			</div>
+			<i>Your question:</i>
+			<div class="indent">
+			<div class="indent"> How many people 
+				<select name="Projection" size=1>
+					<option value="Citizen">were citizens?</option>
+					<option value="Registered">were registered to vote?</option>
+					<option value="Voted">voted?</option>
 				</select>&nbsp;<br>
 			</div>
 			<div class="indent"> Choose your aggregation mode: 
@@ -167,7 +175,6 @@
 					<option value="AVERAGE">Average</option>
 					<option value="MAX">Max</option>
 					<option value="MIN">Min</option>
-					<option value="-1">Do not aggregate</option>
 				</select>&nbsp;<br>
 			</div>
 			<div class="indent"> Some filter: 
@@ -180,10 +187,10 @@
 					<option value="700000">700,000 and over</option>
 				</select>&nbsp;<br>
 			</div>	
-			<div class="indent"> Order Results By: 
+			<div class="indent"> Order results by: 
 				<select name="OrderBy" size=1>
-					<option value="Year ASC, State ASC">Year and State</option>
 					<option value="State ASC">State</option>
+					<option value="aggr_proj">Projection?</option>
 				</select>&nbsp;<br>
 			</div>
 			<input type="submit" value="submit" style = "width:5em; height:2.5em">
@@ -207,6 +214,15 @@
 					sweetAlert("Please select two different candidates", "You selected the same candidate from the same year.", "error");
 					return false;
 			    }
+			});
+			
+			$("#aggrform").submit(function() {
+				if (!$("input[name=year_aggr1]:checked").val() && !$("input[name=year_aggr2]:checked").val()
+						&& !$("input[name=year_aggr3]:checked").val() && !$("input[name=year_aggr4]:checked").val()
+						&& !$("input[name=year_aggr5]:checked").val()) {
+					sweetAlert("Aggregate Query", "You did not select any year to aggregate. Please check off at least one year.", "error");
+					return false;
+				}
 			});
 		});
 		
