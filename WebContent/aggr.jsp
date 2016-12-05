@@ -11,12 +11,13 @@
 
 	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="js/Chart.min.js"></script>
-
-	<link rel="stylesheet" type="text/css" href="css/table.css">	
+	
+	<link rel="stylesheet" type="text/css" href="css/table.css">
+		
 </head>
 <body>
 
-<button onclick="location.href = 'HelloWorld.jsp'" style="color:blue"><b>Home</b></button>
+<button onclick="location.href = 'HelloWorld.jsp'" style="color:blue"><img src="css/back.png"/> <b>Home</b></button>
 <h2 style = "text-align:center;"> Visual Representation of Results </h2>
 
 	<%
@@ -43,6 +44,7 @@
 			
 			String aggr = request.getParameter("Aggregate");
 			String projection = request.getParameter("Projection");
+			String having = request.getParameter("Having");
 			String orderby = request.getParameter("OrderBy");
 		
 			String str; //the query string
@@ -68,6 +70,8 @@
 			
 			//Add group by clause to enable aggregation
 			str+= " GROUP BY State";
+			
+			str+= " HAVING " + aggr + "("+ projection +") >= " + having;
 			
 			if (orderby.equals("aggr_proj")) {
 				str += " ORDER BY " + aggr + "("+ projection +") DESC";
@@ -98,7 +102,7 @@
 				graphname += year5 + ", ";
 			
 			graphname = graphname.substring(0, graphname.length() - 2);
-			graphname += ", " + aggr.substring(0, 1) + aggr.substring(1).toLowerCase();
+			graphname += "; " + aggr;
 			
 			//Create chart tag
 			out.print("<canvas id=\"myChart\" width=\"1100\" height=\"960\"></canvas>");

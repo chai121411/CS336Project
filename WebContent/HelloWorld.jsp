@@ -29,7 +29,7 @@
 <body>
 	<p> </p>
 	<h1>Analyze past election trends about states from 1996 - 2012!</h1> <!-- the usual HTML way -->
-	Ever wanted to perform adhoc queries and have the results shown in a chart? Here you go!
+	<p align="center">Ever wanted to perform adhoc queries and have the results shown in a chart? Here you go!</p>
 	
 	<!-- 
 	<hr id=selectall>
@@ -150,17 +150,18 @@
 	
 	<hr id=aggr_query>
 	<h2>Aggregation Query about States</h2>
-	<p>See some census information about states, aggregated across a selection of years</p>
+	<p>See some census information about states, aggregated across a selection of years!</p>
 		<form method="query" action="aggr.jsp" id="aggrform">
 			<p class="instruction">
 			Check off all the years you would like aggregate
 			<div class="indent">
 				&nbsp;&nbsp;&nbsp;
-				<input type="radio" name="year_aggr1" value="1996"/>1996
-				<input type="radio" name="year_aggr2" value="2000"/>2000
-				<input type="radio" name="year_aggr3" value="2004"/>2004
-				<input type="radio" name="year_aggr4" value="2008"/>2008
-				<input type="radio" name="year_aggr5" value="2012"/>2012
+				<input type="radio" id="year_aggr1" class="year_aggr" name="year_aggr1" value="1996"/>1996
+				<input type="radio" id="year_aggr2" class="year_aggr" name="year_aggr2" value="2000"/>2000
+				<input type="radio" id="year_aggr3" class="year_aggr" name="year_aggr3" value="2004"/>2004
+				<input type="radio" id="year_aggr4" class="year_aggr" name="year_aggr4" value="2008"/>2008
+				<input type="radio" id="year_aggr5" class="year_aggr" name="year_aggr5" value="2012"/>2012
+				<button type="button" id="selectAllYears">Select All Years</button>
 			</div>
 			</p>
 			<div class="instruction">Your question:</div>
@@ -174,19 +175,38 @@
 			<div class="indent"> Choose your aggregation mode: 
 				<select name="Aggregate" size=1>
 					<option value="SUM">Sum</option>
-					<option value="AVERAGE">Average</option>
+					<option value="AVG">Average</option>
+					<option value="STD">Standard Deviation</option>
+					<option value="VARIANCE">Variance</option>
 					<option value="MAX">Max</option>
 					<option value="MIN">Min</option>
 				</select>&nbsp;<br>
 			</div>
-			<div class="indent"> Some filter: 
-				<select name="NAMEMEEEEEEEEEEEEEEE" size=1>
+			<div class="indent"> Aggregations resulting in (HAVING): 
+				<select name="Having" size=1>
 					<option value="0">0 and over</option>
+					<option value="25000">25,000 and over</option>
+					<option value="50000">50,000 and over</option>
+					<option value="75000">75,000 and over</option>
 					<option value="100000">100,000 and over</option>
+					<option value="200000">200,000 and over</option>
 					<option value="250000">250,000 and over</option>
 					<option value="500000">500,000 and over</option>
-					<option value="600000">600,000 and over</option>
-					<option value="700000">700,000 and over</option>
+					<option value="750000">750,000 and over</option>
+					<option value="800000">800,000 and over</option>
+					<option value="900000">900,000 and over</option>
+					<option value="1000000">1,000,000 and over</option>
+					<option value="1250000">1,250,000 and over</option>
+					<option value="1500000">1,500,000 and over</option>
+					<option value="2000000">2,000,000 and over</option>
+					<option value="3000000">3,000,000 and over</option>
+					<option value="4000000">4,000,000 and over</option>
+					<option value="5000000">5,000,000 and over</option>
+					<option value="6000000">6,000,000 and over</option>
+					<option value="7500000">7,500,000 and over</option>
+					<option value="10000000">10,000,000 and over</option>
+					<option value="15000000">15,000,000 and over</option>
+					<option value="15000000">20,000,000 and over</option>
 				</select>&nbsp;<br>
 			</div>	
 			<div class="indent"> Order results by: 
@@ -206,13 +226,29 @@
 		
 		$(document).ready(function() {
 			<!-- http://t4t5.github.io/sweetalert/ -->
-			$("#selectallform").submit(function() {
-				if (!$("input[name=command]:checked").val()) {
-					sweetAlert("Select *", "No selection was made.", "error");
-					return false;
-				}
+			$("#selectAllYears").click(function() {
+				$('.year_aggr').attr('checked',true);
+				$('.year_aggr').attr('checkstate', 'true');
+				$(this).hide();
 			});
 			
+			$(".year_aggr").click(function() {
+			      //if this item is already ticked, make it unticked.
+		        if ($(this).attr('checkstate') == 'true')
+		        {
+		            $(this).attr('checked', false);
+		            $(this).attr('checkstate', 'false');  // .attr returns a string for unknown param values.
+		        }
+		        else
+		        {
+		            $(this).attr('checked', true);
+		            $(this).attr('checkstate', 'true');
+		        }
+		        //refresh the buttonset to display the states correctly.
+		        //$('.year_aggr').buttonset('refresh');
+			});
+			
+					
 			$("#percentagevoteform").submit(function() {
 				if ( $('#Year1').val() == $('#Year2').val()  && $('#Candidate1').val() == $('#Candidate2').val()) {
 					sweetAlert("Please select two different candidates", "You selected the same candidate from the same year.", "error");
@@ -227,9 +263,9 @@
 						&& !$("input[name=year_aggr5]:checked").val()) {
 					sweetAlert("Aggregate Query", "You did not select any year to aggregate. Please check off at least one year.", "error");
 					return false;
-				}	
-				
+				}		
 			});
+			
 		});
 		
 		function dynamicdropdown_query(listindex) {

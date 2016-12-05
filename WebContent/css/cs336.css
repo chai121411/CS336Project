@@ -123,3 +123,20 @@ hr {
 	font-weight: bold;
 	color: #2c87f0;
 }
+
+h1 { color: #111; font-family: 'Open Sans Condensed', sans-serif; font-size: 64px; font-weight: 700; line-height: 64px; margin: 0 0 0; padding: 20px 30px; text-align: center; text-transform: uppercase; }
+
+
+h2 { 
+	color: #111;
+	font-family: 'Open Sans Condensed', sans-serif;
+	font-size: 48px; 
+	font-weight: 700;
+	line-height: 48px;
+	margin: 0 0 0px;
+	padding: 20px 30px;
+}
+
+#selectAllYears {
+	margin: 5px;
+}
