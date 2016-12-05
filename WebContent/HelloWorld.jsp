@@ -21,16 +21,17 @@
 		<li><a href="#aggr_query">Aggregation Query</a></li>
 		<li><a href="#percentagevotes">Percentage of States Query</a></li>
 		<li><a href="#popularvotes">Popular Votes Query</a></li>
-		<li><a href="#selectall">SELECT ALL</a></li>
+		<!-- <li><a href="#selectall">SELECT ALL</a></li> -->
 	</ul>
     </nav>
     
 </head>
 <body>
 	<p> </p>
-	<h2>Analyze past election trends about states from 1996 - 2012!</h2> <!-- the usual HTML way -->
+	<h1>Analyze past election trends about states from 1996 - 2012!</h1> <!-- the usual HTML way -->
 	Ever wanted to perform adhoc queries and have the results shown in a chart? Here you go!
-
+	
+	<!-- 
 	<hr id=selectall>
 	<h3>SELECT * show.jsp</h3>
 	<p><i>This will perform a SELECT * on Candidate or States</i></p>
@@ -42,12 +43,12 @@
 		<input type="radio" name="command" value="States"/>Let's go to a State!
 		</div>
 		<input type="submit" value="submit"  style = "width:5em; height:2.5em"/>
-	</form>
+	</form> -->
 
 	<hr id=popularvotes>
-	<h3>Adhoc Query on Popular Votes</h3>
+	<h2>Adhoc Query on Popular Votes</h2>
 	<p>See how many votes a state gave!</p>
-	<p><i>You can filter by year and votes.</i></p>
+	<p class="instruction">You can filter by year and votes</p>
 		<form method="query" action="query.jsp">
 			<div class="indent">Year: 
 				<select id="queryYear" name="Year" size=1 onchange="javascript: dynamicdropdown_query(this.options[this.selectedIndex].value);">
@@ -80,7 +81,7 @@
 				</select>&nbsp;<br>
 			</div>
 			<div class="indent">
-				<p><i>Change the way results appear with the next two options</i></p>
+				<p class="instruction">Change the way results appear with the next two options</p>
 			</div>
 			<div class="indent"> Group by time and states?: 
 				<select name="Aggregate" size=1>
@@ -99,11 +100,11 @@
 		</form>
 	
 	<hr id=percentagevotes>
-	<h3>Percentage of Votes By State </h3>
+	<h2>Percentage of Votes By State </h2>
 	<p>See how many votes a candidate took from a state!</p>
-	<p>Choose two candidates to compare.</p>
+	<p class="instruction">Choose two candidates to compare</p>
 	<div class="indent">
-		<p><i> A candidate is identified by a year and name.</i></p>
+		<p> A candidate is identified by a <span class="mini-instruction">year</span> and <span class="mini-instruction">name</span></p>
 	</div>
 	<form method="query" action="percent.jsp" id="percentagevoteform">
 		<div class="indent">Candidate 1 - from Year: 
@@ -148,10 +149,11 @@
 	</form>
 	
 	<hr id=aggr_query>
-	<h3>Aggregation Query about States</h3>
-	<p>Look at some census information about states, aggregated across a selection years</p>
+	<h2>Aggregation Query about States</h2>
+	<p>See some census information about states, aggregated across a selection of years</p>
 		<form method="query" action="aggr.jsp" id="aggrform">
-			<i>Check off all the years you would like aggregate</i>
+			<p class="instruction">
+			Check off all the years you would like aggregate
 			<div class="indent">
 				&nbsp;&nbsp;&nbsp;
 				<input type="radio" name="year_aggr1" value="1996"/>1996
@@ -160,10 +162,10 @@
 				<input type="radio" name="year_aggr4" value="2008"/>2008
 				<input type="radio" name="year_aggr5" value="2012"/>2012
 			</div>
-			<i>Your question:</i>
-			<div class="indent">
-			<div class="indent"> How many people 
-				<select name="Projection" size=1>
+			</p>
+			<div class="instruction">Your question:</div>
+			<div class="indent" > How many people 
+				<select name="Projection" size=1 onchange="javascript: dynamicdropdown_aggr(this.options[this.selectedIndex].value);">
 					<option value="Citizen">were citizens?</option>
 					<option value="Registered">were registered to vote?</option>
 					<option value="Voted">voted?</option>
@@ -188,15 +190,17 @@
 				</select>&nbsp;<br>
 			</div>	
 			<div class="indent"> Order results by: 
-				<select name="OrderBy" size=1>
+				<select id="aggrOrderBy" name="OrderBy" size=1>
 					<option value="State ASC">State</option>
-					<option value="aggr_proj">Projection?</option>
+					<option value="aggr_proj"># of people that were citizens</option>
 				</select>&nbsp;<br>
 			</div>
 			<input type="submit" value="submit" style = "width:5em; height:2.5em">
 		</form>
-	
 	<hr>
+	<div class='footer'>
+	</div>
+		
 	<script>
 		<!-- java script to help with dynamic dropdown/error detection-->
 		
@@ -217,12 +221,14 @@
 			});
 			
 			$("#aggrform").submit(function() {
+				var count = 5;
 				if (!$("input[name=year_aggr1]:checked").val() && !$("input[name=year_aggr2]:checked").val()
 						&& !$("input[name=year_aggr3]:checked").val() && !$("input[name=year_aggr4]:checked").val()
 						&& !$("input[name=year_aggr5]:checked").val()) {
 					sweetAlert("Aggregate Query", "You did not select any year to aggregate. Please check off at least one year.", "error");
 					return false;
-				}
+				}	
+				
 			});
 		});
 		
@@ -292,6 +298,25 @@
 	        case "2012" :
 	            document.getElementById("Candidate2").options[0]=new Option("Mitt Romney","Romney");
 	            document.getElementById("Candidate2").options[1]=new Option("Barack Obama","Obama");
+	            break;
+	        }
+	        return true;
+	    }
+	    
+	    function dynamicdropdown_aggr(listindex) {
+	    	document.getElementById("aggrOrderBy").options.length = 0;
+	        switch (listindex) {
+	        case "Citizen" : 
+	        	document.getElementById("aggrOrderBy").options[0]=new Option("State","State ASC");
+            	document.getElementById("aggrOrderBy").options[1]=new Option("# of people that were citizens","aggr_proj");
+	            break;
+	        case "Registered" : 
+	        	document.getElementById("aggrOrderBy").options[0]=new Option("State","State ASC");
+            	document.getElementById("aggrOrderBy").options[1]=new Option("# of people that were registered","aggr_proj");
+	            break;
+	        case "Voted" : 
+	        	document.getElementById("aggrOrderBy").options[0]=new Option("State","State ASC");
+            	document.getElementById("aggrOrderBy").options[1]=new Option("# of people that voted","aggr_proj");
 	            break;
 	        }
 	        return true;

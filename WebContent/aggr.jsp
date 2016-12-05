@@ -70,7 +70,7 @@
 			str+= " GROUP BY State";
 			
 			if (orderby.equals("aggr_proj")) {
-				str += " ORDER BY " + aggr + "("+ projection +")";
+				str += " ORDER BY " + aggr + "("+ projection +") DESC";
 			}
 			
 			System.out.println(str);
