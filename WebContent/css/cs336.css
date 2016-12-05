@@ -3,9 +3,10 @@ input[type=submit]{
 	color:#fff;
 	background-color:#337ab7;
 	font-weight:bold;
+	font-size: 20px;
 	border-color:#2e6da4;
-	margin: 10px;
-	border-radius: 5px;
+	margin: 12px;
+	border-radius: 6px;
 }
 
 input[type=submit].focus,.btn-primary:focus{
@@ -30,8 +31,26 @@ select, input{
 	padding: 5px;
 }
 
+select {
+	font-size: 19px;
+}
+
+select option{
+	font-size: 19px;
+}
+
+#intro {
+	font-size: 21px;
+}
+
+body p.description {
+	font-size: 21px;
+	background-color:   #f9f9f9;
+}
+
 .indent {
 	margin-left: 40px;
+	font-size: 18px;
 }
 
 
@@ -93,8 +112,33 @@ ul.topnav li:not(:first-child):before {
     content: " | ";
 }
 
+h1 { 
+	color: #111;
+	font-family: 'Open Sans Condensed', sans-serif; 
+	font-size: 50px; font-weight: 700; 
+	line-height: 50px; 
+	margin: 0 0 0; padding: 20px 30px; 
+	text-align: center; 
+	text-transform: uppercase; 
+}
+
+
+h2 { 
+	color: #111;
+	font-family: 'Open Sans Condensed', sans-serif;
+	background-color: #ECECEC;
+	font-size: 38px; 
+	font-weight: 700;
+	line-height: 38px;
+	margin: 0 0 0px;
+	padding: 20px 30px;
+}
+
 body {
     padding-top: 30px;
+    font-size: 14px;
+    text-align: center; 
+    width: auto;  
 }
 
 hr {
@@ -115,7 +159,7 @@ hr {
 .instruction {
 	/*font-style: italic;*/
 	font-weight: bold;
-	font-size: 36px;
+	font-size: 26px;
 	color: #2c87f0;
 }
 
@@ -124,19 +168,19 @@ hr {
 	color: #2c87f0;
 }
 
-h1 { color: #111; font-family: 'Open Sans Condensed', sans-serif; font-size: 64px; font-weight: 700; line-height: 64px; margin: 0 0 0; padding: 20px 30px; text-align: center; text-transform: uppercase; }
-
-
-h2 { 
-	color: #111;
-	font-family: 'Open Sans Condensed', sans-serif;
-	font-size: 48px; 
-	font-weight: 700;
-	line-height: 48px;
-	margin: 0 0 0px;
-	padding: 20px 30px;
-}
-
 #selectAllYears {
-	margin: 5px;
+	margin: 6px;
+	border: 1px solid black;
+	font-size: 18px;
+	color: white;
+	border-color : #2989d8;
+ 	background: #2989d8;
+  	background: -moz-linear-gradient(top, #2989d8 0%, #1e5799 100%);
+  	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#2989d8), color-stop(100%,#1e5799));
+  	background: -webkit-linear-gradient(top, #2989d8 0%,#1e5799 100%);
+  	background: -o-linear-gradient(top, #2989d8 0%,#1e5799 100%);
+  	background: -ms-linear-gradient(top, #2989d8 0%,#1e5799 100%);
+  	background: linear-gradient(top, #2989d8 0%,#1e5799 100%);
+  	filter: progid:DXImageTransform.Microsoft.gradient( 
+    startColorstr='#2989d8', endColorstr='#1e5799',GradientType=0 );
 }

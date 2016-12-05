@@ -21,7 +21,6 @@
 		<li><a href="#aggr_query">Aggregation Query</a></li>
 		<li><a href="#percentagevotes">Percentage of States Query</a></li>
 		<li><a href="#popularvotes">Popular Votes Query</a></li>
-		<!-- <li><a href="#selectall">SELECT ALL</a></li> -->
 	</ul>
     </nav>
     
@@ -29,25 +28,11 @@
 <body>
 	<p> </p>
 	<h1>Analyze past election trends about states from 1996 - 2012!</h1> <!-- the usual HTML way -->
-	<p align="center">Ever wanted to perform adhoc queries and have the results shown in a chart? Here you go!</p>
+	<p id="intro" align="center">Ever wanted to perform adhoc queries and have the results shown in a chart? Here you go!</p>
 	
-	<!-- 
-	<hr id=selectall>
-	<h3>SELECT * show.jsp</h3>
-	<p><i>This will perform a SELECT * on Candidate or States</i></p>
-	<form method="get" action="show.jsp" id="selectallform" enctype=text/plain>
-		<div class="indent">
-		<input type="radio" name="command" value="Candidate"/>Let's have a Candidate!
-		</div>
-		<div class="indent">
-		<input type="radio" name="command" value="States"/>Let's go to a State!
-		</div>
-		<input type="submit" value="submit"  style = "width:5em; height:2.5em"/>
-	</form> -->
-
 	<hr id=popularvotes>
 	<h2>Adhoc Query on Popular Votes</h2>
-	<p>See how many votes a state gave!</p>
+	<p class="description">See how many votes a state gave!</p>
 	<p class="instruction">You can filter by year and votes</p>
 		<form method="query" action="query.jsp">
 			<div class="indent">Year: 
@@ -96,12 +81,12 @@
 					<option value="PopVotes DESC">Popular Votes</option>
 				</select>&nbsp;<br>
 			</div>	
-			<input type="submit" value="submit" style = "width:5em; height:2.5em">
+			<input type="submit" value="Submit" style = "width:5em; height:2.5em">
 		</form>
 	
 	<hr id=percentagevotes>
 	<h2>Percentage of Votes By State </h2>
-	<p>See how many votes a candidate took from a state!</p>
+	<p class="description">See how many votes a candidate took from a state!</p>
 	<p class="instruction">Choose two candidates to compare</p>
 	<div class="indent">
 		<p> A candidate is identified by a <span class="mini-instruction">year</span> and <span class="mini-instruction">name</span></p>
@@ -145,15 +130,14 @@
 					<option value="PercentageOfVotes DESC">Percentage of votes</option>
 				</select>&nbsp;<br>
 			</div>
-		<input type="submit" value="submit" style = "width:5em; height:2.5em">
+		<input type="submit" value="Submit" style = "width:5em; height:2.5em">
 	</form>
 	
 	<hr id=aggr_query>
 	<h2>Aggregation Query about States</h2>
-	<p>See some census information about states, aggregated across a selection of years!</p>
+	<p class="description">See some census information about states, aggregated across a selection of years!</p>
+	<p class="instruction"> Check off all the years you would like aggregate</p>
 		<form method="query" action="aggr.jsp" id="aggrform">
-			<p class="instruction">
-			Check off all the years you would like aggregate
 			<div class="indent">
 				&nbsp;&nbsp;&nbsp;
 				<input type="radio" id="year_aggr1" class="year_aggr" name="year_aggr1" value="1996"/>1996
@@ -163,7 +147,6 @@
 				<input type="radio" id="year_aggr5" class="year_aggr" name="year_aggr5" value="2012"/>2012
 				<button type="button" id="selectAllYears">Select All Years</button>
 			</div>
-			</p>
 			<div class="instruction">Your question:</div>
 			<div class="indent" > How many people 
 				<select name="Projection" size=1 onchange="javascript: dynamicdropdown_aggr(this.options[this.selectedIndex].value);">
@@ -215,7 +198,7 @@
 					<option value="aggr_proj"># of people that were citizens</option>
 				</select>&nbsp;<br>
 			</div>
-			<input type="submit" value="submit" style = "width:5em; height:2.5em">
+			<input type="submit" value="Submit" style = "width:5em; height:2.5em">
 		</form>
 	<hr>
 	<div class='footer'>
@@ -266,6 +249,13 @@
 				}		
 			});
 			
+			//anchor offset fix
+			$('#myTopnav a').click(function () {
+				$('html, body').animate({
+					scrollTop: $(this.hash).offset().top - $("#myTopnav").height() - 3 //anchor destination top - fixed header - 3
+				}, 1000); //1000 ms
+				return false;
+			});
 		});
 		
 		function dynamicdropdown_query(listindex) {

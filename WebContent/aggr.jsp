@@ -17,7 +17,7 @@
 </head>
 <body>
 
-<button onclick="location.href = 'HelloWorld.jsp'" style="color:blue"><img src="css/back.png"/> <b>Home</b></button>
+<button onclick="location.href = 'HelloWorld.jsp'" style="color:blue"><img src="css/back16.png"/> <b>Home</b></button>
 <h2 style = "text-align:center;"> Visual Representation of Results </h2>
 
 	<%
