@@ -19,8 +19,8 @@
 	<ul class="topnav" id="myTopnav">
 		<li id="navbartitle">Voting Trends 1996 - 2012</li>
 		<li><a href="#aggr_query">Aggregation Query</a></li>
-		<li><a href="#percentagevotes">Percentage of States Query</a></li>
 		<li><a href="#popularvotes">Popular Votes Query</a></li>
+		<li><a href="#percentagevotes">Percentage of States Query</a></li>
 	</ul>
     </nav>
     
@@ -29,6 +29,55 @@
 	<p> </p>
 	<h1>Analyze past election trends about states from 1996 - 2012!</h1> <!-- the usual HTML way -->
 	<p id="intro" align="center">Ever wanted to perform adhoc queries and have the results shown in a chart? Here you go!</p>
+	
+	<hr id=percentagevotes>
+	<h2>Percentage of Votes By State </h2>
+	<p class="description">See how many votes a candidate took from a state!</p>
+	<p class="instruction">Choose two candidates to compare</p>
+	<div class="indent">
+		<p> A candidate is identified by a <span class="mini-instruction">year</span> and <span class="mini-instruction">name</span></p>
+	</div>
+	<form method="query" action="percent.jsp" id="percentagevoteform">
+		<div class="indent">Candidate 1 - from Year: 
+			<select id="Year1" name="Year1" size=1 onchange="javascript: dynamicdropdown(this.options[this.selectedIndex].value);"> 
+				<option value="1996">1996</option>
+				<option value="2000">2000</option>
+				<option value="2004">2004</option>
+				<option value="2008">2008</option>
+				<option value="2012">2012</option>
+			</select>&nbsp;&nbsp;&nbsp; ,&nbsp; Name:
+			<select id="Candidate1" name="Candidate1" size=1>
+		 		<option value="Dole">Bob Dole</option> 
+		 		<option value="Clinton">Bill Clinton</option>
+			    <!--<option value="Bush">George Bush</option>
+				<option value="Gore">Al Gore</option>
+				<option value="Kerry">John Kerry</option>
+				<option value="McCain">John McCain</option>
+				<option value="Obama">Barack Obama</option>
+				<option value="Romney">Mitt Romney</option>-->
+			</select>&nbsp;
+		</div>
+		<div class="indent">Candidate 2 - from Year: 
+			<select id="Year2" name="Year2" size=1 onchange="javascript: dynamicdropdown2(this.options[this.selectedIndex].value);"> 
+				<option value="1996">1996</option>
+				<option value="2000">2000</option>
+				<option value="2004">2004</option>
+				<option value="2008">2008</option>
+				<option value="2012">2012</option>
+			</select>&nbsp;&nbsp;&nbsp; ,&nbsp; Name:
+			<select id="Candidate2" name="Candidate2" size=1>
+		 		<option value="Dole">Bob Dole</option> 
+		 		<option value="Clinton">Bill Clinton</option>
+			</select>&nbsp;
+		</div>
+		<div class="indent"> Order results by: 
+				<select name="OrderBy" size=1>
+					<option value="V.State">State</option>
+					<option value="PercentageOfVotes DESC">Percentage of votes</option>
+				</select>&nbsp;<br>
+			</div>
+		<input type="submit" value="Submit" style = "width:5em; height:2.5em">
+	</form>
 	
 	<hr id=popularvotes>
 	<h2>Adhoc Query on Popular Votes</h2>
@@ -84,52 +133,66 @@
 			<input type="submit" value="Submit" style = "width:5em; height:2.5em">
 		</form>
 	
-	<hr id=percentagevotes>
-	<h2>Percentage of Votes By State </h2>
-	<p class="description">See how many votes a candidate took from a state!</p>
-	<p class="instruction">Choose two candidates to compare</p>
-	<div class="indent">
-		<p> A candidate is identified by a <span class="mini-instruction">year</span> and <span class="mini-instruction">name</span></p>
-	</div>
-	<form method="query" action="percent.jsp" id="percentagevoteform">
-		<div class="indent">Candidate 1 - from Year: 
-			<select id="Year1" name="Year1" size=1 onchange="javascript: dynamicdropdown(this.options[this.selectedIndex].value);"> 
-				<option value="1996">1996</option>
-				<option value="2000">2000</option>
-				<option value="2004">2004</option>
-				<option value="2008">2008</option>
-				<option value="2012">2012</option>
-			</select>&nbsp;&nbsp;&nbsp; ,&nbsp; Name:
-			<select id="Candidate1" name="Candidate1" size=1>
-		 		<option value="Dole">Bob Dole</option> 
-		 		<option value="Clinton">Bill Clinton</option>
-			    <!--<option value="Bush">George Bush</option>
-				<option value="Gore">Al Gore</option>
-				<option value="Kerry">John Kerry</option>
-				<option value="McCain">John McCain</option>
-				<option value="Obama">Barack Obama</option>
-				<option value="Romney">Mitt Romney</option>-->
-			</select>&nbsp;
+	<hr id=filtercand>
+	<h2>Popular Votes from State, correlated with Candidates</h2>
+	<p class="description">Filter results that relate to Presidential Candidates of your specification. Get back only results you care about!</p>
+	<p class="instruction">Choose your candidate parameters to correlate popular votes with</p>
+	<form method="query" action="filtercand.jsp" id="filtercandform">
+		<div class="indent">Which Year? 
+			<select id="filtercand_year" name="Year" size=1 onchange="javascript: dynamicdropdown_filtercand(this.options[this.selectedIndex].value);">
+				<option value="-1">All years</option>
+				<option value="1996">Only 1996</option>
+				<option value="2000">Only 2000</option>
+				<option value="2004">Only 2004</option>
+				<option value="2008">Only 2008</option>
+				<option value="2012">Only 2012</option>
+			</select>&nbsp;<br>
 		</div>
-		<div class="indent">Candidate 2 - from Year: 
-			<select id="Year2" name="Year2" size=1 onchange="javascript: dynamicdropdown2(this.options[this.selectedIndex].value);"> 
-				<option value="1996">1996</option>
-				<option value="2000">2000</option>
-				<option value="2004">2004</option>
-				<option value="2008">2008</option>
-				<option value="2012">2012</option>
-			</select>&nbsp;&nbsp;&nbsp; ,&nbsp; Name:
-			<select id="Candidate2" name="Candidate2" size=1>
-		 		<option value="Dole">Bob Dole</option> 
-		 		<option value="Clinton">Bill Clinton</option>
-			</select>&nbsp;
+		<div class="indent">Candidates belonging to a Democrat/Republican party?
+			<select id="filtercand_party" name="Party" size=1>
+				<option value="-1">Doesn't Matter</option>
+				<option value="Democrat">Only Democrat</option>
+				<option value="Republican">Only Republican</option>
+			</select>&nbsp;<br>
+		</div>
+		<div class="indent">Results in which Candidates won the election?
+			<select id="filtercand_won" name="Won" size=1>
+				<option value="-1">Doesn't Matter</option>
+				<option value="1">Only Winners</option>
+				<option value="0">Only Losers</option>
+			</select>&nbsp;<br>
+		</div>
+		<div class="indent">Candidates receiving 
+			<select id="filtercand_won" name="ElectoralVotes" size=1>
+				<option value="0">0 and over</option>
+				<option value="100">100 and over</option>
+				<option value="150">150 and over</option>
+				<option value="175">175 and over</option>
+				<option value="200">200 and over</option>
+				<option value="250">250 and over</option>
+				<option value="300">300 and over</option>
+				<option value="350">350 and over</option>
+			</select> electoral votes&nbsp;<br>
+		</div>
+		<div class="indent">Candidate's whose party spent
+			<select id="filtercand_budget" name="Budget" size=1>
+				<option value="0">$0 and over</option>
+				<option value="100000000">$100,000,000 and over</option>
+				<option value="150000000">$150,000,000 and over</option>
+				<option value="200000000">$200,000,000 and over</option>
+				<option value="300000000">$300,000,000 and over</option>
+				<option value="400000000">$400,000,000 and over</option>
+				<option value="500000000">$500,000,000 and over</option>
+				<option value="600000000">$600,000,000 and over</option>
+				<option value="700000000">$700,000,000 and over</option>
+			</select>&nbsp; for the election?<br>
 		</div>
 		<div class="indent"> Order results by: 
 				<select name="OrderBy" size=1>
-					<option value="V.State">State</option>
-					<option value="PercentageOfVotes DESC">Percentage of votes</option>
-				</select>&nbsp;<br>
-			</div>
+				<option value="V.State">State</option>
+				<option value="PopVotes DESC">Popular Votes</option>
+			</select>&nbsp;<br>
+		</div>
 		<input type="submit" value="Submit" style = "width:5em; height:2.5em">
 	</form>
 	
@@ -202,6 +265,10 @@
 		</form>
 	<hr>
 	<div class='footer'>
+		<ul class="footernav" id="footernav">
+			<li><a href="#aboutUs">About Us</a></li>
+			<li><a href="http://www.census.gov/topics/public-sector/voting/data/tables.All.html">Census Resource</a></li>
+		</ul>
 	</div>
 		
 	<script>

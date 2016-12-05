@@ -45,14 +45,13 @@ select option{
 
 body p.description {
 	font-size: 21px;
-	background-color:   #f9f9f9;
+	background-color: #f9f9f9;
 }
 
 .indent {
 	margin-left: 40px;
 	font-size: 18px;
 }
-
 
 /*navbar*/
 nav {
@@ -74,11 +73,11 @@ nav {
     padding: 7px 8px;
     text-decoration: none;
     transition: 0.3s;
-    font-size: 44px;
+    font-size: 36px;
 }
 
 /* Remove margins and padding from the list, and add a black background color */
-ul.topnav {
+ul.topnav, ul.footernav {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -88,28 +87,33 @@ ul.topnav {
 }
 
 /* Float the list items side by side */
-ul.topnav li {
+ul.topnav li, ul.footernav li {
 	float: right;
 }
 
 /* Style the links inside the list items */
-ul.topnav li a {
+ul.topnav li a, ul.footernav li a {
     display: inline-block;
     color: #f2f2f2;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     transition: 0.3s;
-    font-size: 28px;
+    font-size: 22px;
 }
 
 /*background color of links on hover */
-ul.topnav li a:hover {
+ul.topnav li a:hover, ul.footernav li a:hover {
 	background-color: #555;
 }
 
-ul.topnav li:not(:first-child):before {
+ul.topnav li:not(:first-child):before, ul.footernav li:not(:first-child):before {
     content: " | ";
+}
+
+.drop-up {
+    top: auto;
+    bottom: 100% !important;
 }
 
 h1 { 
@@ -137,8 +141,6 @@ h2 {
 body {
     padding-top: 30px;
     font-size: 14px;
-    text-align: center; 
-    width: auto;  
 }
 
 hr {
