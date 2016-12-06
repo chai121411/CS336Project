@@ -28,8 +28,10 @@
 </head>
 <body>
 	<p> </p>
-	<h1>Analyze past election trends about states from 1996 - 2012!</h1> <!-- the usual HTML way -->
-	<p id="intro" align="center">Ever wanted to perform adhoc queries and have the results shown in a chart? Here you go!</p>
+	<h1>Analyze past election trends about states from</h1> <!-- the usual HTML way -->
+	<h1 style="text-align:center; margin: 0;">1996 - 2012!</h1>
+	
+	<h4 id="intro" align="center">Ever wanted to perform adhoc queries and have the results shown in a chart? Here you go!</h6>
 	
 	<hr id=percentagevotes>
 	<h2>Percentage of Votes By State </h2>
