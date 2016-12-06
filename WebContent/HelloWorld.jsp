@@ -19,6 +19,7 @@
 	<ul class="topnav" id="myTopnav">
 		<li id="navbartitle">Voting Trends 1996 - 2012</li>
 		<li><a href="#aggr_query">Aggregation Query</a></li>
+		<li><a href="#filtercand">Popular Votes, correlated with Candidates Query</a></li>
 		<li><a href="#popularvotes">Popular Votes Query</a></li>
 		<li><a href="#percentagevotes">Percentage of States Query</a></li>
 	</ul>
@@ -84,7 +85,7 @@
 	<p class="description">See how many votes a state gave!</p>
 	<p class="instruction">You can filter by year and votes</p>
 		<form method="query" action="query.jsp">
-			<div class="indent">Year: 
+			<div class="indent">Year?
 				<select id="queryYear" name="Year" size=1 onchange="javascript: dynamicdropdown_query(this.options[this.selectedIndex].value);">
 					<option value="-1">All years</option>
 					<option value="1996">Only 1996</option>
@@ -138,7 +139,7 @@
 	<p class="description">Filter results that relate to Presidential Candidates of your specification. Get back only results you care about!</p>
 	<p class="instruction">Choose your candidate parameters to correlate popular votes with</p>
 	<form method="query" action="filtercand.jsp" id="filtercandform">
-		<div class="indent">Which Year? 
+		<div class="indent"> Year? 
 			<select id="filtercand_year" name="Year" size=1 onchange="javascript: dynamicdropdown_filtercand(this.options[this.selectedIndex].value);">
 				<option value="-1">All years</option>
 				<option value="1996">Only 1996</option>
@@ -163,7 +164,7 @@
 			</select>&nbsp;<br>
 		</div>
 		<div class="indent">Candidates receiving 
-			<select id="filtercand_won" name="ElectoralVotes" size=1>
+			<select id="filtercand_ev" name="ElectoralVotes" size=1>
 				<option value="0">0 and over</option>
 				<option value="100">100 and over</option>
 				<option value="150">150 and over</option>
@@ -188,8 +189,9 @@
 			</select>&nbsp; for the election?<br>
 		</div>
 		<div class="indent"> Order results by: 
-				<select name="OrderBy" size=1>
-				<option value="V.State">State</option>
+			<select name="OrderBy" size=1>
+				<option value="Year ASC, State ASC">Year and State</option>
+				<option value="State ASC">State</option>
 				<option value="PopVotes DESC">Popular Votes</option>
 			</select>&nbsp;<br>
 		</div>

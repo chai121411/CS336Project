@@ -60,11 +60,9 @@
 			//Run the query against the database.
 			ResultSet result = stmt.executeQuery(str);
 			
+			out.print("<div id=count></div>");
 			//Create chart tag
 			out.print("<canvas id=\"myChart1\" width=\"900\" height=\"960\"></canvas>");
-			
-			//Create chart tag
-			//out.print("<canvas id=\"myChart2\" width=\"1200\" height=\"1500\"></canvas>");
 			
 			
 			//Make an HTML table to show the results in:	
@@ -116,7 +114,7 @@
 			String data2 = "[";
 			String dataPoints2 = "[{ x: ";
 			
-			
+			int count=0;
 			//parse out the results
 			while (result.next()) {
 				year = result.getString("Year");
@@ -163,10 +161,14 @@
 					labels2 += "\"" + state + "\", ";
 					data2 += percent + ", ";
 					dataPoints2 += "\"" + state+ "\"" + ", y: " + percent + " }, { x: ";
-				}	
+				}
+				count++;
 			}
 			
 			out.print("</table>");
+			if (count == 0) {
+				out.println("<script>$(\"#count\").append( \"<p>No Results Returned!</p>\")</script>");
+			}
 			
 			labels1 = labels1.substring(0, labels1.length() - 2);
 			data1 = data1.substring(0, data1.length() - 2);

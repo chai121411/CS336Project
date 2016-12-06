@@ -39,53 +39,67 @@
 			String year = request.getParameter("Year");
 			String party = request.getParameter("Party");
 			String won = request.getParameter("Won");
+			String ev = request.getParameter("ElectoralVotes");
 			String budget = request.getParameter("Budget");
 			String orderby = request.getParameter("OrderBy");
 		
 			String str; //the query string
 			
 			//Perform percentage query based on parameters from selections
-			str = "SELECT *, " + aggr + "("+ projection +") AS aggr_result FROM States WHERE";
+			str = "SELECT * FROM Votes JOIN Candidate ON (Votes.Year = Candidate.Year AND Votes.LastName = Candidate.LastName) WHERE";
 			
-			if (year != null) 
-				str += " WHERE Year = " + year;
+			if (!year.equals("-1")) 
+				str += " Votes.Year = " + year + " AND";
+			
+			if (!party.equals("-1")) 
+				str += " Candidate.Party = \"" + party + "\" AND";
+				
+			if (!won.equals("-1")) 
+				str += " Candidate.Won = " + won + " AND";
+			
+			if (!ev.equals("-1")) 
+				str += " Candidate.ElectoralVotes >= " + ev + " AND";
+
+			if (!budget.equals("-1")) 
+				str += " Candidate.BudgetSpent >= " + budget + " AND";
 			
 			str = str.substring(0, str.length() - 3); //remove last AND
 			
-			//str += "JOIN States AS ST ON (V.Year = ST.Year AND V.State = ST.State) ";
-			//str += "WHERE (V.Year = " + year1 + " AND V.LastName = \"" + lastname1 + "\"";
-			//str += ") OR (V.Year = " + year2 + " AND V.LastName = \"" + lastname2 + "\")";
-			
-			//Add group by clause to enable aggregation
-			str+= " GROUP BY State";
-			
-			str+= " HAVING " + aggr + "("+ projection +") >= " + having;
-			
-			if (orderby.equals("aggr_proj")) {
-				str += " ORDER BY " + aggr + "("+ projection +") DESC";
-			}
+			str+= " ORDER BY " + orderby;
 			
 			System.out.println(str);
 			//Run the query against the database.
 			ResultSet result = stmt.executeQuery(str);
 			
-			String graphname = null;
-			if (projection.equals("Citizen")) {
-				graphname = "# of people that are Citizens over ";	
-			} else if (projection.equals("Registered")) {
-				graphname = "# of people that were Registered to vote over ";
+			String graphname = "State results correlated with Candidate: ";
+			
+			if (!year.equals("-1")) {
+				graphname += year + ", ";
 			} else {
-				graphname = "# of people that Voted over ";
+				graphname += "All years, ";
 			}
 			
-			if (year1 != null) 
-				graphname += year1 + ", ";
+			if (!party.equals("-1")) 
+				graphname += party + ", ";
+				
+			if (won.equals("0")) 
+				graphname += "Lost, ";
+			else if (won.equals("1")) {
+				graphname += "Won, ";
+			}
+			
+			if (!ev.equals("-1")) 
+				graphname += "Electoral Votes >= " + ev + ", ";
+
+			if (!budget.equals("-1")) 
+				graphname +=  "BudgetSpent - " + budget + ", ";
 			
 			graphname = graphname.substring(0, graphname.length() - 2);
-			graphname += "; " + aggr;
+			
+			out.print("<div id=count></div>");
 			
 			//Create chart tag
-			out.print("<canvas id=\"myChart\" width=\"1100\" height=\"960\"></canvas>");
+			out.print("<canvas id=\"myChart\" width=\"1400\" height=\"1180\"></canvas>");	
 			
 			//Make an HTML table to show the results in:	
 			out.print("<br/>");
@@ -94,17 +108,20 @@
 			
 			out.print("<tr>");
 			out.print("<td>");
+			out.print("Year");
+			out.print("</td>");
+			out.print("<td>");
 			out.print("State");
 			out.print("</td>");
 			out.print("<td>");
-			//out.print(aggr + "("+ projection +")");
 			out.print(graphname);
 			out.print("</td>");
 			out.print("</tr>");
 			
 			//projections
+			String year_proj;
 			String state;
-			String a_result;
+			String popvotes;
 			
 			//Use the these variables to accumulate the chart data
 			String labels = "[";
@@ -112,28 +129,45 @@
 			String backgroundColor = "[";
 			String borderColor = "[";
 			
+			int count = 0;
+			
 			//parse out the results
 			while (result.next()) {
+				year_proj = result.getString("Year");
+				popvotes = result.getString("PopVotes");
 				state = result.getString("State");
-				a_result = result.getString("aggr_result");
 				
+				//make a row
 				out.print("<tr>");
+				//make a column
 				out.print("<td>");
+				//Print out current votes year:
+				out.print(year_proj);
+				out.print("</td>");
+				out.print("<td>");
+				//Print out current state voting:
 				out.print(state);
 				out.print("</td>");
 				out.print("<td>");
-				out.print(a_result);
+				//Print out the number of popular votes
+				out.print(popvotes);
 				out.print("</td>");
-				out.print("</tr>");	
+				out.print("</tr>");
 				
-				labels += "\"" + state + "\", ";
-				data += a_result + ", ";
+				labels += "\"" + year_proj;
+				labels += state + "\", ";
+				data += popvotes + ", ";
 				
 				backgroundColor += "\"rgba(54, 162, 235, 0.2)\", "; //Blue
 				borderColor += "\"rgba(54, 162, 235, 1)\", ";
+				count++;
 			}
 			
 			out.print("</table>");
+			
+			if (count == 0) {
+				out.println("<script>$(\"#count\").append( \"<p>No Results Returned!</p>\")</script>");
+			}
 			
 			labels = labels.substring(0, labels.length() - 2);
 			data = data.substring(0, data.length() - 2);

@@ -64,10 +64,6 @@
 			
 			str = str.substring(0, str.length() - 3); //remove last AND
 			
-			//str += "JOIN States AS ST ON (V.Year = ST.Year AND V.State = ST.State) ";
-			//str += "WHERE (V.Year = " + year1 + " AND V.LastName = \"" + lastname1 + "\"";
-			//str += ") OR (V.Year = " + year2 + " AND V.LastName = \"" + lastname2 + "\")";
-			
 			//Add group by clause to enable aggregation
 			str+= " GROUP BY State";
 			
@@ -104,6 +100,7 @@
 			graphname = graphname.substring(0, graphname.length() - 2);
 			graphname += "; " + aggr;
 			
+			out.print("<div id=count></div>");
 			//Create chart tag
 			out.print("<canvas id=\"myChart\" width=\"1100\" height=\"960\"></canvas>");
 			
@@ -132,6 +129,7 @@
 			String backgroundColor = "[";
 			String borderColor = "[";
 			
+			int count = 0;
 			//parse out the results
 			while (result.next()) {
 				state = result.getString("State");
@@ -151,9 +149,13 @@
 				
 				backgroundColor += "\"rgba(54, 162, 235, 0.2)\", "; //Blue
 				borderColor += "\"rgba(54, 162, 235, 1)\", ";
+				count++;
 			}
 			
 			out.print("</table>");
+			if (count == 0) {
+				out.println("<script>$(\"#count\").append( \"<p>No Results Returned!</p>\")</script>");
+			}
 			
 			labels = labels.substring(0, labels.length() - 2);
 			data = data.substring(0, data.length() - 2);

@@ -62,6 +62,7 @@
 			//Run the query against the database.
 			ResultSet result = stmt.executeQuery(str);
 			
+			out.print("<div id=count></div>");
 			//Create chart tag
 			if (!year_entity.equals("-1")) {
 				out.print("<canvas id=\"myChart\" width=\"1100\" height=\"960\"></canvas>");
@@ -108,6 +109,8 @@
 				pv_project = "SPV"; //pv may be different depending on user input
 			}
 			
+			int count = 0;
+			
 			//parse out the results
 			while (result.next()) {
 				year = result.getString("Year");
@@ -137,9 +140,13 @@
 				
 				backgroundColor += "\"rgba(54, 162, 235, 0.2)\", "; //Blue
 				borderColor += "\"rgba(54, 162, 235, 1)\", ";
+				count++;
 			}
 			
 			out.print("</table>");
+			if (count == 0) {
+				out.println("<script>$(\"#count\").append( \"<p>No Results Returned!</p>\")</script>");
+			}
 			
 			labels = labels.substring(0, labels.length() - 2);
 			data = data.substring(0, data.length() - 2);
