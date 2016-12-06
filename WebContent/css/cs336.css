@@ -103,7 +103,7 @@ ul.topnav li a, ul.footernav li a {
 }
 
 /*background color of links on hover */
-ul.topnav li a:hover, ul.footernav li a:hover {
+ul.topnav li a:hover, ul.footernav li a:hover:not(#notlink) {
 	background-color: #555;
 }
 

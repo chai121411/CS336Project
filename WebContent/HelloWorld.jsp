@@ -268,8 +268,9 @@
 	<hr>
 	<div class='footer'>
 		<ul class="footernav" id="footernav">
-			<li><a href="#aboutUs">About Us</a></li>
-			<li><a href="http://www.census.gov/topics/public-sector/voting/data/tables.All.html">Census Resource</a></li>
+			<li><a href="http://www.census.gov/topics/public-sector/voting/data/tables.All.html">Census</a></li>
+			<li><a href="https://www.archives.gov/federal-register/electoral-college/historical.html">Archives</a></li>
+			<li><a id="notlink">Need more resources? -></a></li>
 		</ul>
 	</div>
 		
