@@ -189,8 +189,8 @@
 			</select>&nbsp; for the election?<br>
 		</div>
 		<div class="indent"> Order results by: 
-			<select name="OrderBy" size=1>
-				<option value="Year ASC, State ASC">Year and State</option>
+			<select id="filtercand_orderby" name="OrderBy" size=1>
+				<option value="Votes.Year ASC, State ASC">Year and State</option>
 				<option value="State ASC">State</option>
 				<option value="PopVotes DESC">Popular Votes</option>
 			</select>&nbsp;<br>
@@ -338,6 +338,22 @@
 	        default:
 	        	document.getElementById("queryOrderBy").options[0]=new Option("State","State ASC");
             	document.getElementById("queryOrderBy").options[1]=new Option("Popular Votes","PopVotes DESC");
+	            break;
+	        }
+	        return true;
+	    }
+		
+		function dynamicdropdown_filtercand(listindex) {
+	    	document.getElementById("filtercand_orderby").options.length = 0;
+	        switch (listindex) {
+	        case "-1" :
+	            document.getElementById("filtercand_orderby").options[0]=new Option("Year and State","Votes.Year ASC, State ASC");
+	            document.getElementById("filtercand_orderby").options[1]=new Option("State","State ASC");
+	            document.getElementById("filtercand_orderby").options[2]=new Option("Popular Votes","PopVotes DESC");
+	        	break;
+	        default:
+	        	document.getElementById("filtercand_orderby").options[0]=new Option("State","State ASC");
+            	document.getElementById("filtercand_orderby").options[1]=new Option("Popular Votes","PopVotes DESC");
 	            break;
 	        }
 	        return true;
