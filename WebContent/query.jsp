@@ -58,14 +58,14 @@
 				str += " ORDER BY " + orderby_entity;
 			}
 			
-			System.out.println(str);
+			//System.out.println(str);
 			//Run the query against the database.
 			ResultSet result = stmt.executeQuery(str);
 			
 			out.print("<div id=count></div>");
 			//Create chart tag
 			if (!year_entity.equals("-1")) {
-				out.print("<canvas id=\"myChart\" width=\"1100\" height=\"960\"></canvas>");
+				out.print("<canvas id=\"myChart\" width=\"1100\" height=\"760\"></canvas>");
 			} else {
 				out.print("<canvas id=\"myChart\" width=\"1400\" height=\"1180\"></canvas>");	
 			}

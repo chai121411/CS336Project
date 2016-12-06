@@ -44,8 +44,6 @@
 			
 			String aggr = request.getParameter("Aggregate");
 			String projection = request.getParameter("Projection");
-			String having = request.getParameter("Having");
-			String orderby = request.getParameter("OrderBy");
 		
 			String str; //the query string
 			
@@ -66,12 +64,6 @@
 			
 			//Add group by clause to enable aggregation
 			str+= " GROUP BY State";
-			
-			str+= " HAVING " + aggr + "("+ projection +") >= " + having;
-			
-			if (orderby.equals("aggr_proj")) {
-				str += " ORDER BY " + aggr + "("+ projection +") DESC";
-			}
 			
 			System.out.println(str);
 			//Run the query against the database.
@@ -102,7 +94,7 @@
 			
 			out.print("<div id=count></div>");
 			//Create chart tag
-			out.print("<canvas id=\"myChart\" width=\"1100\" height=\"960\"></canvas>");
+			out.print("<canvas id=\"myChart\" width=\"900\" height=\"760\"></canvas>");
 			
 			//Make an HTML table to show the results in:	
 			out.print("<br/>");
@@ -153,6 +145,7 @@
 			}
 			
 			out.print("</table>");
+			
 			if (count == 0) {
 				out.println("<script>$(\"#count\").append( \"<p>No Results Returned!</p>\")</script>");
 			}
@@ -175,6 +168,9 @@
 			out.print("borderColor: " + borderColor + ", ");
 			out.print("borderWidth: 1}]}");
 			out.print(", options: { responsive: false, scales: { yAxes: [{ ticks: { beginAtZero:true}}] }}});</script>");
+			
+			System.out.println(labels);
+			System.out.println(data);
 			
 			//close the connection.
 			con.close();

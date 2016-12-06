@@ -67,11 +67,11 @@
 			
 			str+= " ORDER BY " + orderby;
 			
-			System.out.println(str);
+			//System.out.println(str);
 			//Run the query against the database.
 			ResultSet result = stmt.executeQuery(str);
 			
-			String graphname = "State results correlated with Candidate: ";
+			String graphname = " # of Pop. Votes correlated with: ";
 			
 			if (!year.equals("-1")) {
 				graphname += year + ", ";
@@ -92,14 +92,14 @@
 				graphname += "Electoral Votes >= " + ev + ", ";
 
 			if (!budget.equals("-1")) 
-				graphname +=  "BudgetSpent - " + budget + ", ";
+				graphname +=  "BudgetSpent >= " + budget + ", ";
 			
 			graphname = graphname.substring(0, graphname.length() - 2);
 			
 			out.print("<div id=count></div>");
 			
 			//Create chart tag
-			out.print("<canvas id=\"myChart\" width=\"1400\" height=\"1180\"></canvas>");	
+			out.print("<canvas id=\"myChart\" width=\"1100\" height=\"760\"></canvas>");
 			
 			//Make an HTML table to show the results in:	
 			out.print("<br/>");

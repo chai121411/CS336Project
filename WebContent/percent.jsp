@@ -51,18 +51,14 @@
 			if (!orderby.equals("-1")) {
 				str += " ORDER BY " + orderby;
 			}			
-			//System.out.println(year1);
-			//System.out.println(year2);
-			//System.out.println(lastname1);
-			//System.out.println(lastname2);
 			
-			System.out.println(str);
+			//System.out.println(str);
 			//Run the query against the database.
 			ResultSet result = stmt.executeQuery(str);
 			
 			out.print("<div id=count></div>");
 			//Create chart tag
-			out.print("<canvas id=\"myChart1\" width=\"900\" height=\"960\"></canvas>");
+			out.print("<canvas id=\"myChart1\" width=\"900\" height=\"760\"></canvas>");
 			
 			
 			//Make an HTML table to show the results in:	

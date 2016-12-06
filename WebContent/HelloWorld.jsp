@@ -18,10 +18,10 @@
 	<nav>
 	<ul class="topnav" id="myTopnav">
 		<li id="navbartitle">Voting Trends 1996 - 2012</li>
-		<li><a href="#aggr_query">Aggregation Query</a></li>
-		<li><a href="#filtercand">Popular Votes, correlated with Candidates Query</a></li>
-		<li><a href="#popularvotes">Popular Votes Query</a></li>
-		<li><a href="#percentagevotes">Percentage of States Query</a></li>
+		<li><a href="#aggr_query">Aggregation</a></li>
+		<li><a href="#filtercand">Pop. Votes, correlated with Candidates</a></li>
+		<li><a href="#popularvotes">Pop. Votes</a></li>
+		<li><a href="#percentagevotes">Percentage of States</a></li>
 	</ul>
     </nav>
     
@@ -137,7 +137,7 @@
 		</form>
 	
 	<hr id=filtercand>
-	<h2>Popular Votes from State, correlated with Candidates</h2>
+	<h2>Popular Votes, correlated with Candidates</h2>
 	<p class="description">Filter results that relate to Presidential Candidates of your specification. Get back only results you care about!</p>
 	<p class="instruction">Choose your candidate parameters to correlate popular votes with</p>
 	<form method="query" action="filtercand.jsp" id="filtercandform">
@@ -154,7 +154,7 @@
 		<div class="indent">Candidates belonging to a Democrat/Republican party?
 			<select id="filtercand_party" name="Party" size=1>
 				<option value="-1">Doesn't Matter</option>
-				<option value="Democrat">Only Democrat</option>
+				<option value="Democratic">Only Democrat</option>
 				<option value="Republican">Only Republican</option>
 			</select>&nbsp;<br>
 		</div>
@@ -203,7 +203,7 @@
 	<hr id=aggr_query>
 	<h2>Aggregation Query about States</h2>
 	<p class="description">See some census information about states, aggregated across a selection of years!</p>
-	<p class="instruction"> Check off all the years you would like aggregate</p>
+	<p class="instruction"> Check off all the years you would like aggregate state into</p>
 		<form method="query" action="aggr.jsp" id="aggrform">
 			<div class="indent">
 				&nbsp;&nbsp;&nbsp;
@@ -215,13 +215,6 @@
 				<button type="button" id="selectAllYears">Select All Years</button>
 			</div>
 			<div class="instruction">Your question:</div>
-			<div class="indent" > How many people 
-				<select name="Projection" size=1 onchange="javascript: dynamicdropdown_aggr(this.options[this.selectedIndex].value);">
-					<option value="Citizen">were citizens?</option>
-					<option value="Registered">were registered to vote?</option>
-					<option value="Voted">voted?</option>
-				</select>&nbsp;<br>
-			</div>
 			<div class="indent"> Choose your aggregation mode: 
 				<select name="Aggregate" size=1>
 					<option value="SUM">Sum</option>
@@ -232,37 +225,11 @@
 					<option value="MIN">Min</option>
 				</select>&nbsp;<br>
 			</div>
-			<div class="indent"> Aggregations resulting in (HAVING): 
-				<select name="Having" size=1>
-					<option value="0">0 and over</option>
-					<option value="25000">25,000 and over</option>
-					<option value="50000">50,000 and over</option>
-					<option value="75000">75,000 and over</option>
-					<option value="100000">100,000 and over</option>
-					<option value="200000">200,000 and over</option>
-					<option value="250000">250,000 and over</option>
-					<option value="500000">500,000 and over</option>
-					<option value="750000">750,000 and over</option>
-					<option value="800000">800,000 and over</option>
-					<option value="900000">900,000 and over</option>
-					<option value="1000000">1,000,000 and over</option>
-					<option value="1250000">1,250,000 and over</option>
-					<option value="1500000">1,500,000 and over</option>
-					<option value="2000000">2,000,000 and over</option>
-					<option value="3000000">3,000,000 and over</option>
-					<option value="4000000">4,000,000 and over</option>
-					<option value="5000000">5,000,000 and over</option>
-					<option value="6000000">6,000,000 and over</option>
-					<option value="7500000">7,500,000 and over</option>
-					<option value="10000000">10,000,000 and over</option>
-					<option value="15000000">15,000,000 and over</option>
-					<option value="15000000">20,000,000 and over</option>
-				</select>&nbsp;<br>
-			</div>	
-			<div class="indent"> Order results by: 
-				<select id="aggrOrderBy" name="OrderBy" size=1>
-					<option value="State ASC">State</option>
-					<option value="aggr_proj"># of people that were citizens</option>
+			<div class="indent" > How many people 
+				<select name="Projection" size=1 onchange="javascript: dynamicdropdown_aggr(this.options[this.selectedIndex].value);">
+					<option value="Citizen">were citizens?</option>
+					<option value="Registered">were registered to vote?</option>
+					<option value="Voted">voted?</option>
 				</select>&nbsp;<br>
 			</div>
 			<input type="submit" value="Submit" style = "width:5em; height:2.5em">
@@ -412,25 +379,6 @@
 	        case "2012" :
 	            document.getElementById("Candidate2").options[0]=new Option("Mitt Romney","Romney");
 	            document.getElementById("Candidate2").options[1]=new Option("Barack Obama","Obama");
-	            break;
-	        }
-	        return true;
-	    }
-	    
-	    function dynamicdropdown_aggr(listindex) {
-	    	document.getElementById("aggrOrderBy").options.length = 0;
-	        switch (listindex) {
-	        case "Citizen" : 
-	        	document.getElementById("aggrOrderBy").options[0]=new Option("State","State ASC");
-            	document.getElementById("aggrOrderBy").options[1]=new Option("# of people that were citizens","aggr_proj");
-	            break;
-	        case "Registered" : 
-	        	document.getElementById("aggrOrderBy").options[0]=new Option("State","State ASC");
-            	document.getElementById("aggrOrderBy").options[1]=new Option("# of people that were registered","aggr_proj");
-	            break;
-	        case "Voted" : 
-	        	document.getElementById("aggrOrderBy").options[0]=new Option("State","State ASC");
-            	document.getElementById("aggrOrderBy").options[1]=new Option("# of people that voted","aggr_proj");
 	            break;
 	        }
 	        return true;
