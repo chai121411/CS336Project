@@ -203,7 +203,9 @@
 	<hr id=aggr_query>
 	<h2>Aggregation Query about States</h2>
 	<p class="description">See some census information about states, aggregated across a selection of years!</p>
-	<p class="instruction"> Check off all the years you would like aggregate state into</p>
+	<p class="instruction"> Check off all the years for which you would like to know about &nbsp; <span class="tooltip"> <img src="css/question-mark-16.png"/>
+  		<span class="tooltiptext">You may select multiple years! Please note finding the Variance or the STD of each state, for only 1 selected year will return results with 0.</span>
+	</span> </p>
 		<form method="query" action="aggr.jsp" id="aggrform">
 			<div class="indent">
 				&nbsp;&nbsp;&nbsp;
